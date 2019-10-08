@@ -2,8 +2,8 @@ import express, { NextFunction, Request, Response } from "express";
 import createError, { HttpError } from "http-errors";
 import logger from "morgan";
 import path from "path";
-import indexRouter from "./routes/index";
-import usersRouter from "./routes/users";
+import indexRouter from "./controllers/testController";
+import usersRouter from "./controllers/userController";
 
 var app = express();
 
