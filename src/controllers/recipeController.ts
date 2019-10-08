@@ -1,40 +1,58 @@
 import express, { Request, Response } from "express";
-import { check, validationResult } from "express-validator/check";
+import { check, validationResult } from "express-validator";
 import { ICourseValues, ICuisineValues } from "../types";
+import { Recipe } from "../db/recipe";
 
 const recipeValidation = [
-  check("name").exists(),
-  check("name").isString(),
-
-  check("ingredients").exists(),
-  check("ingredients").isArray(),
-
-  check("instructions").exists(),
-  check("instructions").isArray(),
-
-  check("course").exists(),
-  check("course").isIn(ICourseValues),
-
-  check("cuisine").exists(),
-  check("cuisine").isIn(ICuisineValues),
-
-  check("sources").exists(),
-  check("sources").isArray()
+  check("name")
+    .exists()
+    .isString(),
+  check("ingredients")
+    .exists()
+    .isArray(),
+  check("instructions")
+    .exists()
+    .isArray(),
+  check("course")
+    .exists()
+    .isIn(ICourseValues),
+  check("cuisine")
+    .exists()
+    .isIn(ICuisineValues),
+  check("sources")
+    .exists()
+    .isArray()
 ];
-
 const recipeController = express.Router();
-
 recipeController.get("/", (req, res, next) => {
   res.send("respond with a resource");
 });
-
 recipeController.post("/", recipeValidation, (req: Request, res: Response) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+    return res
+      .status(422)
+      .json({ errors: errors.array({ onlyFirstError: true }) });
   }
 
-  return res.send("ok");
-});
+  const {
+    name,
+    ingredients,
+    instructions,
+    course,
+    cuisine,
+    sources
+  } = req.body;
 
+  const recipe = new Recipe({
+    name,
+    ingredients,
+    instructions,
+    course,
+    cuisine,
+    sources
+  });
+  //await recipe.save()
+  return res.send(recipe);
+});
 export default recipeController;
