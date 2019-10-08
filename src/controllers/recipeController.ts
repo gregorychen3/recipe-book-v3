@@ -1,12 +1,15 @@
 import express, { Request, Response } from "express";
 import { check, validationResult } from "express-validator";
-import { ICourseValues, ICuisineValues } from "../types";
 import { Recipe } from "../db/recipe";
+import { ICourseValues, ICuisineValues } from "../types";
 
 const recipeValidation = [
   check("name")
     .exists()
     .isString(),
+  check("servings")
+    .exists()
+    .isNumeric(),
   check("ingredients")
     .exists()
     .isArray(),
@@ -71,6 +74,7 @@ recipeController.post(
 
     const {
       name,
+      servings,
       ingredients,
       instructions,
       course,
@@ -80,6 +84,7 @@ recipeController.post(
 
     const recipe = new Recipe({
       name,
+      servings,
       ingredients,
       instructions,
       course,
