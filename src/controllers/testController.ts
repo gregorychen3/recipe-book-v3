@@ -1,7 +1,7 @@
 import express from "express";
 
-const router = express.Router();
+const testController = express.Router();
 
-router.get("/", (req, res, next) => res.send("ok"));
+testController.get("/", (req, res, next) => res.send("ok"));
 
-export default router;
+export default testController;
