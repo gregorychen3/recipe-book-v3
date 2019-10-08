@@ -1,11 +1,21 @@
 import { Recipe } from "../db/recipe";
+import l from "../logger";
 
-const create = () => {};
+const create = () => {
+  l.info("Creating recipe");
+};
 
-const list = async () => await Recipe.find();
+const list = async () => {
+  l.info("Listing recipes");
+  return await Recipe.find();
+};
 
-const update = () => {};
+const update = () => {
+  l.info("Updating recipe");
+};
 
-const remove = () => {};
+const remove = () => {
+  l.info("Removing recipe");
+};
 
 export default { create, list, update, remove };
