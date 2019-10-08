@@ -3,7 +3,7 @@ import createError, { HttpError } from "http-errors";
 import logger from "morgan";
 import path from "path";
 import testController from "./controllers/testController";
-import userController from "./controllers/userController";
+import recipeController from "./controllers/recipeController";
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", testController);
-app.use("/users", userController);
+app.use("/recipes", recipeController);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
