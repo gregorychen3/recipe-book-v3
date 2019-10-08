@@ -3,6 +3,8 @@ import l from "../logger";
 
 const create = () => {
   l.info("Creating recipe");
+  const recipe = new Recipe({});
+  return recipe.save();
 };
 
 const list = async () => {
