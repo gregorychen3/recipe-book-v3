@@ -13,6 +13,9 @@ const recipeValidation = [
   check("instructions")
     .exists()
     .isArray(),
+  check("instructions.*")
+    .exists({ checkFalsy: true })
+    .isString(),
   check("course")
     .exists()
     .isIn(ICourseValues),
@@ -21,7 +24,10 @@ const recipeValidation = [
     .isIn(ICuisineValues),
   check("sources")
     .exists()
-    .isArray()
+    .isArray(),
+  check("sources.*")
+    .exists({ checkFalsy: true })
+    .isString()
 ];
 const recipeController = express.Router();
 recipeController.get("/", (req, res, next) => {
