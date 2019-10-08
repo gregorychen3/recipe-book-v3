@@ -7,6 +7,12 @@ const recipeValidation = [
   check("name")
     .exists()
     .isString(),
+  check("course")
+    .exists()
+    .isIn(ICourseValues),
+  check("cuisine")
+    .exists()
+    .isIn(ICuisineValues),
   check("servings")
     .exists()
     .isNumeric(),
@@ -40,12 +46,6 @@ const recipeValidation = [
   check("instructions.*")
     .exists({ checkFalsy: true })
     .isString(),
-  check("course")
-    .exists()
-    .isIn(ICourseValues),
-  check("cuisine")
-    .exists()
-    .isIn(ICuisineValues),
   check("sources")
     .exists()
     .isArray(),
@@ -74,21 +74,21 @@ recipeController.post(
 
     const {
       name,
+      course,
+      cuisine,
       servings,
       ingredients,
       instructions,
-      course,
-      cuisine,
       sources
     } = req.body;
 
     const recipe = new Recipe({
       name,
+      course,
+      cuisine,
       servings,
       ingredients,
       instructions,
-      course,
-      cuisine,
       sources
     });
     const newRecipe = await recipe.save();

@@ -42,10 +42,10 @@ export interface IIngredient {
 
 export interface IRecipe {
   name: string;
+  course: ICourse;
+  cuisine: ICuisine;
   servings: number;
   ingredients: IIngredient[];
   instructions: string[];
-  course: ICourse;
-  cuisine: ICuisine;
   sources: string[];
 }
