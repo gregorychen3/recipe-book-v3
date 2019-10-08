@@ -35,9 +35,10 @@ export const ICuisineValues = [
 ];
 
 export interface IIngredient {
-  qty: number;
-  unit: string;
-  servings: number;
+  qty?: number;
+  unit?: string;
+  name: string;
+  servings?: number;
 }
 
 export interface IRecipe {

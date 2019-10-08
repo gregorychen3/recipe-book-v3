@@ -10,6 +10,21 @@ const recipeValidation = [
   check("ingredients")
     .exists()
     .isArray(),
+  check("ingredients.*")
+    .exists()
+    .custom(value => {
+      if (!value.name) {
+        throw new Error("Ingredient name missing");
+      }
+      if (value.qty || value.unit || value.servings) {
+        if (!value.qty || !value.unit || !value.servings) {
+          throw new Error(
+            "Ingredient must have qty unit and servings, or none of them"
+          );
+        }
+      }
+      return true;
+    }),
   check("instructions")
     .exists()
     .isArray(),

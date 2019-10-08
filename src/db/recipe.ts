@@ -6,7 +6,7 @@ export interface IRecipeModel extends IRecipe, Document {}
 export const RecipeSchema = new Schema({
   name: { type: String, required: true },
   ingredients: {
-    type: [{ qty: Number, unit: String, servings: Number }],
+    type: [{ name: String, qty: Number, unit: String, servings: Number }],
     required: true
   },
   instructions: { type: [String], required: true },
