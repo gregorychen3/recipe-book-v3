@@ -2,8 +2,9 @@ import express, { NextFunction, Request, Response } from "express";
 import createError, { HttpError } from "http-errors";
 import logger from "morgan";
 import path from "path";
-import testController from "./controllers/testController";
 import recipeController from "./controllers/recipeController";
+import testController from "./controllers/testController";
+import { initDbConn } from "./db/db";
 
 const app = express();
 
@@ -11,6 +12,8 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+
+initDbConn();
 
 app.use("/", testController);
 app.use("/recipes", recipeController);
