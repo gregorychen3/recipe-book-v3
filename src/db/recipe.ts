@@ -1,5 +1,5 @@
 import { Document, Model, model, Schema } from "mongoose";
-import { IRecipe } from "../types";
+import { ICourseValues, ICuisineValues, IRecipe } from "../types";
 
 export interface IRecipeModel extends IRecipe, Document {}
 
@@ -7,28 +7,12 @@ export const RecipeSchema = new Schema({
   name: { type: String, required: true },
   course: {
     type: String,
-    enum: [
-      "antipasti",
-      "primi",
-      "secondi",
-      "dolci",
-      "contorni",
-      "sauces",
-      "beverages",
-      "other"
-    ],
+    enum: ICourseValues,
     required: true
   },
   cuisine: {
     type: String,
-    enum: [
-      "italian",
-      "anglophone",
-      "mediterranean",
-      "french",
-      "asian",
-      "other"
-    ],
+    enum: ICuisineValues,
     required: true
   },
   servings: { type: Number, required: true },
