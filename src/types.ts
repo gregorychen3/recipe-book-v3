@@ -7,6 +7,16 @@ export type ICourse =
   | "sauces"
   | "beverages"
   | "other";
+export const ICourseValues = [
+  "antipasti",
+  "primi",
+  "secondi",
+  "dolci",
+  "contorni",
+  "sauces",
+  "beverages",
+  "other"
+];
 
 export type ICuisine =
   | "italian"
@@ -15,6 +25,14 @@ export type ICuisine =
   | "french"
   | "asian"
   | "other";
+export const ICuisineValues = [
+  "italian",
+  "anglophone",
+  "mediterranean",
+  "french",
+  "asian",
+  "other"
+];
 
 export interface IIngredient {
   qty: number;

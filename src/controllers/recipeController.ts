@@ -1,7 +1,26 @@
 import express, { Request, Response } from "express";
 import { check, validationResult } from "express-validator/check";
+import { ICourseValues, ICuisineValues } from "../types";
 
-const recipeValidation = [check("name").exists(), check("name").isString()];
+const recipeValidation = [
+  check("name").exists(),
+  check("name").isString(),
+
+  check("ingredients").exists(),
+  check("ingredients").isArray(),
+
+  check("instructions").exists(),
+  check("instructions").isArray(),
+
+  check("course").exists(),
+  check("course").isIn(ICourseValues),
+
+  check("cuisine").exists(),
+  check("cuisine").isIn(ICuisineValues),
+
+  check("sources").exists(),
+  check("sources").isArray()
+];
 
 const recipeController = express.Router();
 
