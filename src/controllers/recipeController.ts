@@ -19,8 +19,14 @@ const recipeValidation = [
       if (value.qty || value.unit) {
         if (!value.qty || !value.unit) {
           throw new Error(
-            "If any of qty or unit are present, both must be present"
+            "If either qty or unit are present, both must be present"
           );
+        }
+        if (typeof value.qty !== "number") {
+          throw new Error("Ingredient qty must be number");
+        }
+        if (typeof value.unit !== "string") {
+          throw new Error("Ingredient unit must be string");
         }
       }
       return true;
