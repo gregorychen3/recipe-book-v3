@@ -19,7 +19,7 @@ const recipeValidation = [
       if (value.qty || value.unit || value.servings) {
         if (!value.qty || !value.unit || !value.servings) {
           throw new Error(
-            "Ingredient must have qty unit and servings, or none of them"
+            "If any of qty, unit, or servings are present, all must be present"
           );
         }
       }
