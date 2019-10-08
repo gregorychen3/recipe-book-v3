@@ -16,10 +16,10 @@ const recipeValidation = [
       if (!value.name) {
         throw new Error("Ingredient name missing");
       }
-      if (value.qty || value.unit || value.servings) {
-        if (!value.qty || !value.unit || !value.servings) {
+      if (value.qty || value.unit) {
+        if (!value.qty || !value.unit) {
           throw new Error(
-            "If any of qty, unit, or servings are present, all must be present"
+            "If any of qty or unit are present, both must be present"
           );
         }
       }

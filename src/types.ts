@@ -38,11 +38,11 @@ export interface IIngredient {
   name: string;
   qty?: number;
   unit?: string;
-  servings?: number;
 }
 
 export interface IRecipe {
   name: string;
+  servings: number;
   ingredients: IIngredient[];
   instructions: string[];
   course: ICourse;
