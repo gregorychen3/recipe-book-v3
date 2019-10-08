@@ -19,7 +19,6 @@ export const RecipeSchema = new Schema({
   instructions: { type: [String], required: true },
   course: {
     type: String,
-    required: true,
     enum: [
       "antipasti",
       "primi",
@@ -29,12 +28,20 @@ export const RecipeSchema = new Schema({
       "sauces",
       "beverages",
       "other"
-    ]
+    ],
+    required: true
   },
   cuisine: {
     type: String,
-    required: true,
-    enum: ["italian", "anglophone", "mediterranean", "french", "asian", "other"]
+    enum: [
+      "italian",
+      "anglophone",
+      "mediterranean",
+      "french",
+      "asian",
+      "other"
+    ],
+    required: true
   },
   sources: { type: [String], required: true }
 });
