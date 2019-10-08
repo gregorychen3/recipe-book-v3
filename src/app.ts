@@ -2,8 +2,8 @@ import express, { NextFunction, Request, Response } from "express";
 import createError, { HttpError } from "http-errors";
 import logger from "morgan";
 import path from "path";
-import indexRouter from "./controllers/testController";
-import usersRouter from "./controllers/userController";
+import testController from "./controllers/testController";
+import userController from "./controllers/userController";
 
 const app = express();
 
@@ -12,8 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/", testController);
+app.use("/users", userController);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
