@@ -1,8 +1,6 @@
-import { Action } from "redux";
-import { ThunkAction } from "redux-thunk";
-import client from "../apiClient";
-import { RootState } from "./reducers";
+import { Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
+import client from "../apiClient";
 
 //
 // SYNC ACTION TYPES
@@ -64,12 +62,7 @@ export const fetchRecipesFailure = (): ActionTypes => ({
 //
 // THUNK ACTION CREATORS
 // ---------------------
-export const fetchRecipes = (): ThunkAction<
-  void,
-  RootState,
-  null,
-  Action<string>
-> => async dispatch => {
+export const fetchRecipes = () => async (dispatch: Dispatch): Promise<void> => {
   dispatch(fetchRecipesRequest());
   try {
     const response = await client.fetchRecipes();

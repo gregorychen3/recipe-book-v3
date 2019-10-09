@@ -1,5 +1,5 @@
 import { IRecipeModel } from "../../../../src/db/recipe";
-import { ActionTypes } from "../actions";
+import { ActionTypes, FETCH_RECIPES_SUCCESS } from "../actions";
 
 export interface DataState {
   recipes: IRecipeModel[];
@@ -12,6 +12,11 @@ const dataReducer = (
   action: ActionTypes
 ): DataState => {
   switch (action.type) {
+    case FETCH_RECIPES_SUCCESS:
+      return {
+        ...state,
+        recipes: action.payload
+      };
     default:
       return state;
   }
