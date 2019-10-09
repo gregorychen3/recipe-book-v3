@@ -19,10 +19,14 @@ class RecipesPage extends Component<Props> {
     return (
       <section className="section">
         <div className="container">
-          <h1 className="title">Hello World</h1>
-          <p className="subtitle">
-            My first website with <strong>Bulma</strong>!
-          </p>
+          <div className="is-divider" data-content="ANTIPASTI"></div>
+          <div className="is-divider" data-content="PRIMI"></div>
+          <div className="is-divider" data-content="SECONDI"></div>
+          <div className="is-divider" data-content="DOLCI"></div>
+          <div className="is-divider" data-content="CONTORNI"></div>
+          <div className="is-divider" data-content="SAUCES"></div>
+          <div className="is-divider" data-content="BEVERAGES"></div>
+          <div className="is-divider" data-content="OTHER"></div>
         </div>
       </section>
     );
