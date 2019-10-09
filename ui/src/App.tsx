@@ -1,17 +1,20 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <section className="section">
-      <div className="container">
-        <h1 className="title">Hello World</h1>
-        <p className="subtitle">
-          My first website with <strong>Bulma</strong>!
-        </p>
-      </div>
-    </section>
+    <>
+      <Navbar />
+      <section className="section">
+        <div className="container">
+          <h1 className="title">Hello World</h1>
+          <p className="subtitle">
+            My first website with <strong>Bulma</strong>!
+          </p>
+        </div>
+      </section>
+    </>
   );
   /*
   return (
