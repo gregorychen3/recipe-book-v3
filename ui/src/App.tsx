@@ -1,20 +1,35 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
+import AboutPage from "./pages/aboutPage";
+import RecipePage from "./pages/recipePage";
+import RecipesPage from "./pages/recipesPage";
 
 function App() {
   return (
-    <>
+    <Router>
       <Navbar />
-      <section className="section">
-        <div className="container">
-          <h1 className="title">Hello World</h1>
-          <p className="subtitle">
-            My first website with <strong>Bulma</strong>!
-          </p>
-        </div>
-      </section>
-    </>
+      <Switch>
+        <Route exact path="/">
+          <Redirect to="/recipes" />
+        </Route>
+        <Route exact path="/recipes">
+          <RecipesPage />
+        </Route>
+        <Route exact path="/recipes/:recipeId">
+          <RecipePage />
+        </Route>
+        <Route exact path="/about">
+          <AboutPage />
+        </Route>
+      </Switch>
+    </Router>
   );
   /*
   return (
