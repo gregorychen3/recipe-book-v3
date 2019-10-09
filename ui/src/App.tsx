@@ -5,7 +5,7 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import Navbar from "./components/Navbar";
 import AboutPage from "./pages/aboutPage";
 import RecipePage from "./pages/recipePage";
