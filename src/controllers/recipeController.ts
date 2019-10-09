@@ -96,6 +96,46 @@ recipeController.post(
   }
 );
 
+recipeController.post(
+  "/:id",
+  recipeValidation,
+  async (req: Request, res: Response) => {
+    const recipe = await Recipe.findOne({ _id: req.params.id });
+    if (!recipe) {
+      return res.sendStatus(404);
+    }
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res
+        .status(422)
+        .json({ errors: errors.array({ onlyFirstError: true }) });
+    }
+
+    const {
+      name,
+      course,
+      cuisine,
+      servings,
+      ingredients,
+      instructions,
+      sources
+    } = req.body;
+
+    recipe.name = name;
+    recipe.course = course;
+    recipe.cuisine = cuisine;
+    recipe.servings = servings;
+    recipe.ingredients = ingredients;
+    recipe.instructions = instructions;
+    recipe.sources = sources;
+
+    const updatedRecipe = await recipe.save();
+
+    return res.send(updatedRecipe);
+  }
+);
+
 recipeController.delete("/:id", async (req, res) => {
   const recipe = await Recipe.findOne({ _id: req.params.id });
   if (!recipe) {
