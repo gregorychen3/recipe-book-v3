@@ -96,4 +96,14 @@ recipeController.post(
   }
 );
 
+recipeController.delete("/:id", async (req, res) => {
+  const recipe = await Recipe.findOne({ _id: req.params.id });
+  if (!recipe) {
+    return res.sendStatus(404);
+  }
+
+  const deleted = await recipe.remove();
+  return res.send({ _id: deleted._id });
+});
+
 export default recipeController;
