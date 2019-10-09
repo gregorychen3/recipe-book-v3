@@ -1,18 +1,19 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Navbar extends Component {
   render() {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
+          <Link to={"/recipes"} className="navbar-item">
             <span className="icon">
               <i className="fas fa-utensils" />
             </span>
             <span>
               <strong>Greg and Ally's Recipe Book</strong>
             </span>
-          </a>
+          </Link>
 
           <a
             role="button"
@@ -32,16 +33,24 @@ export default class Navbar extends Component {
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link">Browse</a>
               <div className="navbar-dropdown">
-                <a className="navbar-item">By Course</a>
-                <a className="navbar-item">By Cuisine</a>
-                <a className="navbar-item">A-Z</a>
+                <Link to={"/recipes"} className="navbar-item">
+                  By Course
+                </Link>
+                <Link to={"/recipes"} className="navbar-item">
+                  By Cuisine
+                </Link>
+                <Link to={"/recipes"} className="navbar-item">
+                  A-Z
+                </Link>
               </div>
             </div>
             <a className="navbar-item">Add Recipe</a>
           </div>
 
           <div className="navbar-end">
-            <a className="navbar-item">About</a>
+            <Link to={"/about"} className="navbar-item">
+              About
+            </Link>
           </div>
         </div>
       </nav>
