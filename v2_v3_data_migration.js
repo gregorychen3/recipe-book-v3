@@ -15,8 +15,17 @@ const getCuisine = oldCuisine =>
   oldCuisine === "chinese" ? "asian" : oldCuisine;
 
   const getIngredients = ingredients =>
-  ingredients.map(i=>({name: i.ingredient_name, qty: i.qty, unit:i.unit}));
-
+  ingredients.map(i=> {
+    const ret = {name: i.ingredient_name}
+    if (i.qty) {
+      ret.qty = i.qty
+    }
+    if (i.unit) {
+      ret.unit = i.unit
+    }
+    return ret
+  });
+    
 const migrated = oldRecipes.map(r => ({
   name: r.recipe_name,
   course: getCourse(r.course),
