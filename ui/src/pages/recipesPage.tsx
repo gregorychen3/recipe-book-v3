@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import queryString from "query-string";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { ActionTypes, fetchRecipes } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
+import { useLocation } from "react-router";
 
 interface Props {
   recipes: IRecipeModel[];
@@ -14,6 +16,10 @@ const RecipesPage = ({ recipes, fetchRecipes }: Props) => {
   useEffect(() => {
     fetchRecipes();
   }, []);
+
+  let location = useLocation();
+  const parsed = queryString.parse(location.search);
+  console.log(parsed);
 
   return (
     <section className="section">
