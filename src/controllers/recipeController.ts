@@ -21,22 +21,21 @@ const recipeValidation = [
     .isArray(),
   check("ingredients.*")
     .exists()
-    .custom(value => {
-      if (!value.name) {
+    .custom(ingredient => {
+      if (!ingredient.name) {
         throw new Error("Ingredient name missing");
       }
-      if (value.qty || value.unit) {
-        if (!value.qty || !value.unit) {
-          throw new Error(
-            "If either qty or unit are present, both must be present"
-          );
-        }
-        if (typeof value.qty !== "number") {
-          throw new Error("Ingredient qty must be number");
-        }
-        if (typeof value.unit !== "string") {
-          throw new Error("Ingredient unit must be string");
-        }
+      if (typeof ingredient.name !== "string") {
+        throw new Error("Ingredient name must be string");
+      }
+      if (ingredient.qty && typeof ingredient.qty !== "number") {
+        throw new Error("Ingredient qty must be number");
+      }
+      if (ingredient.unit && typeof ingredient.unit !== "string") {
+        throw new Error("Ingredient unit must be string");
+      }
+      if (ingredient.unit && !ingredient.qty) {
+        throw new Error("Ingredient has unit but no qty");
       }
       return true;
     }),
