@@ -15,26 +15,23 @@ const courseValues = [
 interface Props {
   recipes: IRecipeModel[];
 }
-const RecipeListByCourse = ({ recipes }: Props) => {
-  console.log(recipes);
-  return (
-    <div className="container">
-      {courseValues.map(course => {
-        return (
-          <>
-            <div className="is-divider" data-content={course.toUpperCase()} />
-            <ul>
-              {recipes
-                .filter(recipe => recipe.course === course)
-                .map(recipe => (
-                  <li>{recipe.name}</li>
-                ))}
-            </ul>
-          </>
-        );
-      })}
-    </div>
-  );
-};
+const RecipeListByCourse = ({ recipes }: Props) => (
+  <div className="container">
+    {courseValues.map(course => {
+      return (
+        <>
+          <div className="is-divider" data-content={course.toUpperCase()} />
+          <ul>
+            {recipes
+              .filter(recipe => recipe.course === course)
+              .map(recipe => (
+                <li>{recipe.name}</li>
+              ))}
+          </ul>
+        </>
+      );
+    })}
+  </div>
+);
 
 export default RecipeListByCourse;
