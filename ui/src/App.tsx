@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import Navbar from "./components/Navbar";
-import AboutPage from "./pages/aboutPage";
-import RecipePage from "./pages/recipePage";
-import RecipesPage from "./pages/recipesPage";
+import AboutPage from "./pages/AboutPage";
+import RecipePage from "./pages/RecipePage";
+import RecipesPage from "./pages/RecipesPage";
 
 function App() {
   return (
