@@ -17,7 +17,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route exact path="/">
-          <Redirect to="/recipes" />
+          <Redirect to="/recipes?groupBy=course" />
         </Route>
         <Route exact path="/recipes">
           <RecipesPage />

@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
 import queryString from "query-string";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useLocation } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
+import RecipeListByCourse from "../components/RecipeListByCourse";
+import RecipeListByCuisine from "../components/RecipeListByCuisine";
 import { ActionTypes, fetchRecipes } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
-import { useLocation } from "react-router";
 
 interface Props {
   recipes: IRecipeModel[];
@@ -19,21 +21,12 @@ const RecipesPage = ({ recipes, fetchRecipes }: Props) => {
 
   let location = useLocation();
   const parsed = queryString.parse(location.search);
-  console.log(parsed);
+  const groupBy = parsed.groupBy ? parsed.groupBy : "course";
 
   return (
     <section className="section">
-      <div className="container">
-        <div className="is-divider" data-content="ANTIPASTI"></div>
-        <div className="is-divider" data-content="PRIMI"></div>
-        <div className="is-divider" data-content="SECONDI"></div>
-        <div className="is-divider" data-content="DOLCI"></div>
-        <div className="is-divider" data-content="CONTORNI"></div>
-        <div className="is-divider" data-content="SAUCES"></div>
-        <div className="is-divider" data-content="BEVERAGES"></div>
-        <div className="is-divider" data-content="OTHER"></div>
-      </div>
-      {JSON.stringify(recipes)}
+      {groupBy == "course" && <RecipeListByCourse recipes={recipes} />}
+      {groupBy == "cuisine" && <RecipeListByCuisine recipes={recipes} />}
     </section>
   );
 };
