@@ -25,8 +25,8 @@ const RecipesPage = ({ recipes, fetchRecipes }: Props) => {
 
   return (
     <section className="section">
-      {groupBy == "course" && <RecipeListByCourse recipes={recipes} />}
-      {groupBy == "cuisine" && <RecipeListByCuisine recipes={recipes} />}
+      {groupBy === "course" && <RecipeListByCourse recipes={recipes} />}
+      {groupBy === "cuisine" && <RecipeListByCuisine recipes={recipes} />}
     </section>
   );
 };
