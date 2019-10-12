@@ -66,6 +66,14 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
           ))}
         </ol>
       </div>
+      <div className="is-divider" data-content="SOURCES" />
+      <div className="content">
+        <ul>
+          {recipe.sources.map(s => (
+            <li>{s}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
