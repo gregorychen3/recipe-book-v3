@@ -1,7 +1,9 @@
 import { FormikProps, withFormik } from "formik";
 import React from "react";
+import { useHistory } from "react-router";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { ICourse, ICuisine, IIngredient } from "../../../src/types";
+import { capitalize } from "../helpers";
 
 // Shape of form values
 interface FormValues {
@@ -21,7 +23,86 @@ interface OtherProps {
 // Aside: You may see InjectedFormikProps<OtherProps, FormValues> instead of what comes below in older code.. InjectedFormikProps was artifact of when Formik only exported a HoC. It is also less flexible as it MUST wrap all props (it passes them through).
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const { touched, errors, isSubmitting } = props;
-  return <div>foo</div>;
+  let history = useHistory();
+  return (
+    <section className="section">
+      <div className="container">
+        <h1 className="title has-text-centered">
+          <a className="button is-white is-pulled-left is-invisible">
+            <span className="icon has-text-info is-small">
+              <i className="fas fa-edit" />
+            </span>
+          </a>
+          {props.values.name}
+          <a
+            onClick={() => history.push(`/recipes/${props.recipe._id}`)}
+            className="button is-white is-pulled-right"
+          >
+            <span className="icon has-text-info is-small">
+              <i className="fas fa-edit" />
+            </span>
+          </a>
+        </h1>
+
+        <nav className="level">
+          <p className="level-item has-text-centered" />
+          <p className="level-item has-text-centered">
+            <i className="fas fa-utensils" />
+            <span style={{ paddingLeft: 5 }}>
+              {capitalize(props.recipe.course)}
+            </span>
+          </p>
+          <p className="level-item has-text-centered">
+            <i className="fas fa-globe" />
+            <span style={{ paddingLeft: 5 }}>
+              {capitalize(props.recipe.cuisine)}
+            </span>
+          </p>
+          <p className="level-item has-text-centered" />
+        </nav>
+
+        {props.recipe.ingredients.length > 0 && (
+          <>
+            <div className="is-divider" data-content="INGREDIENTS" />
+            <div className="content">
+              <ul>
+                {props.recipe.ingredients.map(i => (
+                  <li>{JSON.stringify(i)}</li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+
+        {props.recipe.instructions.length > 0 && (
+          <>
+            <div className="is-divider" data-content="INSTRUCTIONS" />
+            <div className="content">
+              <ol type="1">
+                {props.recipe.instructions.map(i => (
+                  <li>{i}</li>
+                ))}
+              </ol>
+            </div>
+          </>
+        )}
+
+        {props.recipe.sources.length > 0 && (
+          <>
+            <div className="is-divider" data-content="SOURCES" />
+            <div className="content">
+              <ul>
+                {props.recipe.sources.map(s => (
+                  <li>{JSON.stringify(s)}</li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  );
+
   /*
   return (
     <Form>
