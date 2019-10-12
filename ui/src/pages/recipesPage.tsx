@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import { useLocation } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
-import RecipeListByCourse from "../components/RecipeListByCourse";
-import RecipeListByCuisine from "../components/RecipeListByCuisine";
+import RecipeList from "../components/RecipeList";
 import { ActionTypes, fetchRecipes } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
+import { IGroupBy } from "../types";
 
 interface Props {
   recipes: IRecipeModel[];
@@ -21,12 +21,14 @@ const RecipesPage = ({ recipes, fetchRecipes }: Props) => {
 
   let location = useLocation();
   const parsed = queryString.parse(location.search);
-  const groupBy = parsed.groupBy ? parsed.groupBy : "course";
+  let groupBy: IGroupBy;
+  if (parsed.groupBy === "cuisine") {
+    groupBy = "cuisine";
+  } else groupBy = "course";
 
   return (
     <section className="section">
-      {groupBy === "course" && <RecipeListByCourse recipes={recipes} />}
-      {groupBy === "cuisine" && <RecipeListByCuisine recipes={recipes} />}
+      {<RecipeList recipes={recipes} groupBy={groupBy} />}
     </section>
   );
 };
