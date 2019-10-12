@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { IGroupBy } from "../types";
 
@@ -36,7 +37,9 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
             {recipes
               .filter(recipe => recipe.course === course)
               .map(recipe => (
-                <li>{recipe.name}</li>
+                <li>
+                  <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+                </li>
               ))}
           </ul>
         </>
