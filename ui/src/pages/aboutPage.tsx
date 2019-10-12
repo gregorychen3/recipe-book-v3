@@ -5,8 +5,8 @@ const imagePath = "./gregandally.jpg";
 const AboutPage = () => (
   <div className="container">
     <img src={imagePath} alt="gregandally" />
-    <h1 className="title is-3">Greg and Ally's Recipe Book</h1>
-    <h4 className="title is-4">Project Goals</h4>
+    <h1 className="title is-spaced">Greg and Ally's Recipe Book</h1>
+    <h2 className="subtitle">Project Goals</h2>
     <div className="content">
       <ul>
         <li>assist in everyday cooking</li>
@@ -15,7 +15,7 @@ const AboutPage = () => (
       </ul>
     </div>
     <a href="https://github.com/gregorychen3/recipe-book">
-      <span className="title is-4">Tech Stack</span>
+      <span className="subtitle">Tech Stack</span>
       <span className="icon">
         <i className="fab fa-github" />
       </span>
@@ -53,8 +53,8 @@ const AboutPage = () => (
         </li>
       </ul>
     </div>
-    <h4 className="title is-4">Contact</h4>
-    Kindly direct all inquiries to{" "}
+    <h2 className="subtitle">Contact</h2>
+    Kindly direct all inquiries to
     <a href="mailto:cenaacasaperdue@gmail.com">cenaacasaperdue@gmail.com</a>,
     thank you.
   </div>
