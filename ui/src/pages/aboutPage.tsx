@@ -14,10 +14,10 @@ const AboutPage = () => (
         <li>learn web-development technologies</li>
       </ul>
     </div>
-    <h4 className="title is-4">Tech Stack</h4>
     <a href="https://github.com/gregorychen3/recipe-book">
+      <span className="title is-4">Tech Stack</span>
       <span className="icon">
-        <i className="fab fa-github"></i>
+        <i className="fab fa-github" />
       </span>
       GitHub
     </a>
@@ -37,7 +37,7 @@ const AboutPage = () => (
           v2
           <ul>
             <li>React UI</li>
-            <li>RESTful Express.js API</li>
+            <li>Express.js REST API</li>
             <li>PostgreSQL</li>
             <li>Deployed to EC2 via Docker</li>
           </ul>
@@ -45,8 +45,8 @@ const AboutPage = () => (
         <li>
           v3
           <ul>
-            <li>React Hooks + Redux UI using Typescript</li>
-            <li>RESTful Express.js API using Typescript</li>
+            <li>React Hooks + Redux UI + Typescript</li>
+            <li>Express.js REST API + Typescript</li>
             <li>MongoDB</li>
             <li>Deployed to Heroku</li>
           </ul>
