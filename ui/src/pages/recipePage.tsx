@@ -1,3 +1,5 @@
 import React, { Component } from "react";
 
-const RecipePage = () => "RecipePage";
+const RecipePage = () => <div>RecipePage</div>;
+
+export default RecipePage;
