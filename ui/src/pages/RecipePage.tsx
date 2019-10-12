@@ -1,3 +1,4 @@
+import isUrl from "is-url";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
@@ -16,6 +17,15 @@ const getIngredientDisplay = (i: IIngredient) => {
   display += i.name;
   return display;
 };
+
+const getSourceDisplay = (s: string) =>
+  isUrl(s) ? (
+    <a href={s} target="_blank" rel="noopener noreferrer">
+      {s}
+    </a>
+  ) : (
+    s
+  );
 
 interface Props {
   recipes: IRecipeModel[];
@@ -85,7 +95,7 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
             <div className="content">
               <ul>
                 {recipe.sources.map(s => (
-                  <li>{s}</li>
+                  <li>{getSourceDisplay(s)}</li>
                 ))}
               </ul>
             </div>
