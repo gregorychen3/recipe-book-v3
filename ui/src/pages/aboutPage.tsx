@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 
 const imagePath = "./gregandally.jpg";
 
 const AboutPage = () => (
   <div className="container">
-    <img src={imagePath} />
+    <img src={imagePath} alt="gregandally" />
     <h1 className="title is-3">Greg and Ally's Recipe Book</h1>
     <h4 className="title is-4">Project Goals</h4>
     <div className="content">
