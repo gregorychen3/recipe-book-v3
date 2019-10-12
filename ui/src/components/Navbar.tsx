@@ -21,6 +21,7 @@ export default class Navbar extends Component {
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
+            href="#/"
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -31,7 +32,9 @@ export default class Navbar extends Component {
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
             <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">Browse</a>
+              <a className="navbar-link" href="#/">
+                Browse
+              </a>
               <div className="navbar-dropdown">
                 <Link to={"/recipes"} className="navbar-item">
                   By Course
@@ -44,7 +47,9 @@ export default class Navbar extends Component {
                 </Link>
               </div>
             </div>
-            <a className="navbar-item">Add Recipe</a>
+            <a className="navbar-item" href="#/">
+              Add Recipe
+            </a>
           </div>
 
           <div className="navbar-end">
