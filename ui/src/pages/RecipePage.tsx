@@ -36,61 +36,63 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
   console.log(recipe.sources.length);
 
   return (
-    <div className="container">
-      <h1 className="title has-text-centered">{recipe.name}</h1>
+    <section className="section">
+      <div className="container">
+        <h1 className="title has-text-centered">{recipe.name}</h1>
 
-      <nav className="level">
-        <p className="level-item has-text-centered" />
-        <p className="level-item has-text-centered">
-          <i className="fas fa-utensils" />
-          <span style={{ paddingLeft: 5 }}>{capitalize(recipe.course)}</span>
-        </p>
-        <p className="level-item has-text-centered">
-          <i className="fas fa-globe" />
-          <span style={{ paddingLeft: 5 }}>{capitalize(recipe.cuisine)}</span>
-        </p>
-        <p className="level-item has-text-centered" />
-      </nav>
+        <nav className="level">
+          <p className="level-item has-text-centered" />
+          <p className="level-item has-text-centered">
+            <i className="fas fa-utensils" />
+            <span style={{ paddingLeft: 5 }}>{capitalize(recipe.course)}</span>
+          </p>
+          <p className="level-item has-text-centered">
+            <i className="fas fa-globe" />
+            <span style={{ paddingLeft: 5 }}>{capitalize(recipe.cuisine)}</span>
+          </p>
+          <p className="level-item has-text-centered" />
+        </nav>
 
-      {recipe.ingredients.length > 0 && (
-        <>
-          <div className="is-divider" data-content="INGREDIENTS" />
-          <div className="content">
-            <ul>
-              {recipe.ingredients.map(i => (
-                <li>{getIngredientDisplay(i)}</li>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
+        {recipe.ingredients.length > 0 && (
+          <>
+            <div className="is-divider" data-content="INGREDIENTS" />
+            <div className="content">
+              <ul>
+                {recipe.ingredients.map(i => (
+                  <li>{getIngredientDisplay(i)}</li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
 
-      {recipe.instructions.length > 0 && (
-        <>
-          <div className="is-divider" data-content="INSTRUCTIONS" />
-          <div className="content">
-            <ol type="1">
-              {recipe.instructions.map(i => (
-                <li>{i}</li>
-              ))}
-            </ol>
-          </div>
-        </>
-      )}
+        {recipe.instructions.length > 0 && (
+          <>
+            <div className="is-divider" data-content="INSTRUCTIONS" />
+            <div className="content">
+              <ol type="1">
+                {recipe.instructions.map(i => (
+                  <li>{i}</li>
+                ))}
+              </ol>
+            </div>
+          </>
+        )}
 
-      {recipe.sources.length > 0 && (
-        <>
-          <div className="is-divider" data-content="SOURCES" />
-          <div className="content">
-            <ul>
-              {recipe.sources.map(s => (
-                <li>{s}</li>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
-    </div>
+        {recipe.sources.length > 0 && (
+          <>
+            <div className="is-divider" data-content="SOURCES" />
+            <div className="content">
+              <ul>
+                {recipe.sources.map(s => (
+                  <li>{s}</li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+      </div>
+    </section>
   );
 };
 
