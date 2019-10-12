@@ -27,50 +27,39 @@ interface Props {
   groupBy: IGroupBy;
 }
 const RecipeList = ({ recipes, groupBy }: Props) => {
-  const renderByCourse = () => {
-    return (
-      <div className="container">
-        {courseValues.map(course => {
-          return (
-            <>
-              <div className="is-divider" data-content={course.toUpperCase()} />
-              <ul>
-                {recipes
-                  .filter(recipe => recipe.course === course)
-                  .map(recipe => (
-                    <li>{recipe.name}</li>
-                  ))}
-              </ul>
-            </>
-          );
-        })}
-      </div>
-    );
-  };
+  const renderByCourse = () => (
+    <>
+      {courseValues.map(course => (
+        <>
+          <div className="is-divider" data-content={course.toUpperCase()} />
+          <ul>
+            {recipes
+              .filter(recipe => recipe.course === course)
+              .map(recipe => (
+                <li>{recipe.name}</li>
+              ))}
+          </ul>
+        </>
+      ))}
+    </>
+  );
 
-  const renderByCuisine = () => {
-    return (
-      <div className="container">
-        {cuisineValues.map(cuisine => {
-          return (
-            <>
-              <div
-                className="is-divider"
-                data-content={cuisine.toUpperCase()}
-              />
-              <ul>
-                {recipes
-                  .filter(recipe => recipe.cuisine === cuisine)
-                  .map(recipe => (
-                    <li>{recipe.name}</li>
-                  ))}
-              </ul>
-            </>
-          );
-        })}
-      </div>
-    );
-  };
+  const renderByCuisine = () => (
+    <>
+      {cuisineValues.map(cuisine => (
+        <>
+          <div className="is-divider" data-content={cuisine.toUpperCase()} />
+          <ul>
+            {recipes
+              .filter(recipe => recipe.cuisine === cuisine)
+              .map(recipe => (
+                <li>{recipe.name}</li>
+              ))}
+          </ul>
+        </>
+      ))}
+    </>
+  );
 
   return groupBy === "course" ? renderByCourse() : renderByCuisine();
 };

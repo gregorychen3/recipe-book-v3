@@ -27,9 +27,9 @@ const RecipesPage = ({ recipes, fetchRecipes }: Props) => {
   } else groupBy = "course";
 
   return (
-    <section className="section">
-      {<RecipeList recipes={recipes} groupBy={groupBy} />}
-    </section>
+    <div className="container">
+      <RecipeList recipes={recipes} groupBy={groupBy} />
+    </div>
   );
 };
 
