@@ -38,7 +38,7 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
               .filter(recipe => recipe.course === course)
               .map(recipe => (
                 <li>
-                  <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+                  <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
                 </li>
               ))}
           </ul>
