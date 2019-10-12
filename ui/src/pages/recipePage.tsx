@@ -1,7 +1,3 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
-export default class RecipePage extends Component {
-  render() {
-    return "RecipePage";
-  }
-}
+const RecipePage = () => "RecipePage";
