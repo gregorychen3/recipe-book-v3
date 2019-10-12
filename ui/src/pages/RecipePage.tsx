@@ -46,7 +46,19 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
   return (
     <section className="section">
       <div className="container">
-        <h1 className="title has-text-centered">{recipe.name}</h1>
+        <h1 className="title has-text-centered">
+          <a className="button is-white is-pulled-left is-invisible">
+            <span className="icon has-text-info is-small">
+              <i className="fas fa-edit" />
+            </span>
+          </a>
+          {recipe.name}
+          <a className="button is-white is-pulled-right">
+            <span className="icon has-text-info is-small">
+              <i className="fas fa-edit" />
+            </span>
+          </a>
+        </h1>
 
         <nav className="level">
           <p className="level-item has-text-centered" />
