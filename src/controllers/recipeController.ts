@@ -57,7 +57,7 @@ const recipeController = express.Router();
 
 recipeController.get("/", async (req, res, next) => {
   const recipes = await Recipe.find();
-  return res.json(recipes);
+  return res.send(recipes);
 });
 
 recipeController.post(
@@ -68,7 +68,7 @@ recipeController.post(
     if (!errors.isEmpty()) {
       return res
         .status(422)
-        .json({ errors: errors.array({ onlyFirstError: true }) });
+        .send({ errors: errors.array({ onlyFirstError: true }) });
     }
 
     const {
@@ -108,7 +108,7 @@ recipeController.post(
     if (!errors.isEmpty()) {
       return res
         .status(422)
-        .json({ errors: errors.array({ onlyFirstError: true }) });
+        .send({ errors: errors.array({ onlyFirstError: true }) });
     }
 
     const {
