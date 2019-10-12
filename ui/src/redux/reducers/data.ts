@@ -1,4 +1,5 @@
 import { IRecipeModel } from "../../../../src/db/recipe";
+import { compareByProp } from "../../helpers";
 import {
   ActionTypes,
   FETCH_RECIPES_SUCCESS,
@@ -19,7 +20,7 @@ const dataReducer = (
     case FETCH_RECIPES_SUCCESS:
       return {
         ...state,
-        recipes: action.payload
+        recipes: action.payload.sort(compareByProp("name"))
       };
     case FETCH_RECIPE_SUCCESS:
       return {
@@ -27,7 +28,7 @@ const dataReducer = (
         recipes: [
           ...state.recipes.filter(r => r._id !== action.payload._id),
           action.payload
-        ]
+        ].sort(compareByProp("name"))
       };
     default:
       return state;
