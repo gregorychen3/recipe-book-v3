@@ -1,7 +1,7 @@
 import isUrl from "is-url";
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { IIngredient } from "../../../src/types";
@@ -32,6 +32,8 @@ interface Props {
   fetchRecipe: typeof fetchRecipe;
 }
 const RecipePage = ({ recipes, fetchRecipe }: Props) => {
+  let history = useHistory();
+
   let { recipeId } = useParams();
 
   useEffect(() => {
@@ -53,7 +55,10 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
             </span>
           </a>
           {recipe.name}
-          <a className="button is-white is-pulled-right">
+          <a
+            onClick={() => history.push(`/recipes/${recipeId}/edit`)}
+            className="button is-white is-pulled-right"
+          >
             <span className="icon has-text-info is-small">
               <i className="fas fa-edit" />
             </span>
