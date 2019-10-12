@@ -28,6 +28,7 @@ const getSourceDisplay = (s: string) =>
   );
 
 interface Props {
+  edit: boolean;
   recipes: IRecipeModel[];
   fetchRecipe: typeof fetchRecipe;
 }

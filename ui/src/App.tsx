@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import Navbar from "./components/Navbar";
-import { RecipeForm } from "./components/RecipeForm";
 import AboutPage from "./pages/AboutPage";
 import RecipePage from "./pages/RecipePage";
 import RecipesPage from "./pages/RecipesPage";
@@ -24,10 +23,10 @@ function App() {
           <RecipesPage />
         </Route>
         <Route exact path="/recipes/:recipeId/edit">
-          <RecipeForm />
+          <RecipePage edit={true} />
         </Route>
         <Route exact path="/recipes/:recipeId">
-          <RecipePage />
+          <RecipePage edit={false} />
         </Route>
         <Route exact path="/about">
           <AboutPage />
