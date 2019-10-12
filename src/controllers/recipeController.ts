@@ -60,6 +60,11 @@ recipeController.get("/", async (req, res, next) => {
   return res.send(recipes);
 });
 
+recipeController.get("/:id", async (req, res, next) => {
+  const recipe = await Recipe.findOne({ _id: req.params.id });
+  return recipe ? res.sendStatus(404) : res.send(recipe);
+});
+
 recipeController.post(
   "/",
   recipeValidation,
