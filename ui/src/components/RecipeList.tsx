@@ -28,6 +28,7 @@ interface Props {
   groupBy: IGroupBy;
 }
 const RecipeList = ({ recipes, groupBy }: Props) => {
+  // recipes originating from redux store are already alphabetically sorted
   const renderAlphabetically = () => (
     <>
       <div className="is-divider" data-content="A-Z" />
