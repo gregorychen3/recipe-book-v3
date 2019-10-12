@@ -3,10 +3,19 @@ import { connect } from "react-redux";
 import { useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
+import { IIngredient } from "../../../src/types";
 import { capitalize } from "../helpers";
 import { ActionTypes, fetchRecipe } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
+
+const getIngredientDisplay = (i: IIngredient) => {
+  let display = "";
+  i.qty && (display += `${i.qty} `);
+  i.unit && (display += `${i.unit} `);
+  display += i.name;
+  return display;
+};
 
 interface Props {
   recipes: IRecipeModel[];
@@ -42,6 +51,13 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
       </nav>
 
       <div className="is-divider" data-content="INGREDIENTS" />
+      <div className="content">
+        <ul>
+          {recipe.ingredients.map(i => (
+            <li>{getIngredientDisplay(i)}</li>
+          ))}
+        </ul>
+      </div>
       <div className="is-divider" data-content="INSTRUCTIONS" />
     </div>
   );
