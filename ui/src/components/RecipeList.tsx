@@ -28,6 +28,19 @@ interface Props {
   groupBy: IGroupBy;
 }
 const RecipeList = ({ recipes, groupBy }: Props) => {
+  const renderAlphabetically = () => (
+    <>
+      <div className="is-divider" data-content="A-Z" />
+      <ul>
+        {recipes.map(recipe => (
+          <li>
+            <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+
   const renderByCourse = () => (
     <>
       {courseValues.map(course => (
@@ -68,7 +81,7 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
 
   switch (groupBy) {
     case "alphabetical":
-      return <div>alphabetical</div>;
+      return renderAlphabetically();
     case "course":
       return renderByCourse();
     case "cuisine":
