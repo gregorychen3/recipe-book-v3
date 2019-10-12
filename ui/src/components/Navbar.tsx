@@ -36,13 +36,16 @@ export default class Navbar extends Component {
                 Browse
               </a>
               <div className="navbar-dropdown">
-                <Link to={"/recipes"} className="navbar-item">
+                <Link to={"/recipes?groupBy=course"} className="navbar-item">
                   By Course
                 </Link>
-                <Link to={"/recipes"} className="navbar-item">
+                <Link to={"/recipes?groupBy=cuisine"} className="navbar-item">
                   By Cuisine
                 </Link>
-                <Link to={"/recipes"} className="navbar-item">
+                <Link
+                  to={"/recipes?groupBy=alphabetical"}
+                  className="navbar-item"
+                >
                   A-Z
                 </Link>
               </div>
