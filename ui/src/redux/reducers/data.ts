@@ -1,5 +1,9 @@
 import { IRecipeModel } from "../../../../src/db/recipe";
-import { ActionTypes, FETCH_RECIPES_SUCCESS } from "../actions";
+import {
+  ActionTypes,
+  FETCH_RECIPES_SUCCESS,
+  FETCH_RECIPE_SUCCESS
+} from "../actions";
 
 export interface DataState {
   recipes: IRecipeModel[];
@@ -16,6 +20,14 @@ const dataReducer = (
       return {
         ...state,
         recipes: action.payload
+      };
+    case FETCH_RECIPE_SUCCESS:
+      return {
+        ...state,
+        recipes: [
+          ...state.recipes.filter(r => r._id !== action.payload._id),
+          action.payload
+        ]
       };
     default:
       return state;
