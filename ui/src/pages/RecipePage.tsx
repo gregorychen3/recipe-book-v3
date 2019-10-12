@@ -48,7 +48,7 @@ const RecipePage = ({ recipes, fetchRecipe, edit }: Props) => {
   }
 
   if (edit) {
-    return <RecipeForm initialEmail="email@email" message="mymessage" />;
+    return <RecipeForm recipe={recipe} />;
   }
 
   return (

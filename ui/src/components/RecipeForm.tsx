@@ -1,20 +1,28 @@
+import { FormikProps, withFormik } from "formik";
 import React from "react";
-import * as Yup from "yup";
-import { withFormik, FormikProps, FormikErrors, Form, Field } from "formik";
+import { IRecipeModel } from "../../../src/db/recipe";
+import { ICourse, ICuisine, IIngredient } from "../../../src/types";
 
 // Shape of form values
 interface FormValues {
-  email: string;
-  password: string;
+  name: string;
+  course: ICourse;
+  cuisine: ICuisine;
+  servings: number;
+  ingredients: IIngredient[];
+  instructions: string[];
+  sources: string[];
 }
 
 interface OtherProps {
-  message: string;
+  recipe: IRecipeModel;
 }
 
 // Aside: You may see InjectedFormikProps<OtherProps, FormValues> instead of what comes below in older code.. InjectedFormikProps was artifact of when Formik only exported a HoC. It is also less flexible as it MUST wrap all props (it passes them through).
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
-  const { touched, errors, isSubmitting, message } = props;
+  const { touched, errors, isSubmitting } = props;
+  return <div>foo</div>;
+  /*
   return (
     <Form>
       <h1>{message}</h1>
@@ -28,22 +36,35 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
         Submit
       </button>
     </Form>
-  );
+  );*/
 };
 
 // The type of props MyForm receives
 interface MyFormProps {
-  initialEmail?: string;
-  message: string; // if this passed all the way through you might do this or make a union type
+  recipe: IRecipeModel; // if this passed all the way through you might do this or make a union type
 }
 
 // Wrap our form with the using withFormik HoC
 export const RecipeForm = withFormik<MyFormProps, FormValues>({
   // Transform outer props into form values
   mapPropsToValues: props => {
+    const {
+      name,
+      course,
+      cuisine,
+      servings,
+      ingredients,
+      instructions,
+      sources
+    } = props.recipe;
     return {
-      email: props.initialEmail || "",
-      password: ""
+      name,
+      course,
+      cuisine,
+      servings,
+      ingredients,
+      instructions,
+      sources
     };
   },
 
