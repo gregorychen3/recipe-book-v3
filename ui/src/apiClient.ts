@@ -39,6 +39,10 @@ const apiClient = {
     const path = `/recipes`;
     return axios.get(path);
   },
+  fetchRecipe: (recipeId: string): AxiosPromise<IRecipeModel> => {
+    const path = `/recipe/${recipeId}`;
+    return axios.get(path);
+  },
   createRecipe: (recipe: IRecipe): AxiosPromise<IRecipeModel> => {
     const path = `/recipes`;
     return axios.post(path, recipe);

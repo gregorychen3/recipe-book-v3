@@ -30,10 +30,27 @@ interface FetchRecipesFailureAction {
   type: typeof FETCH_RECIPES_FAILURE;
 }
 
+export const FETCH_RECIPE_REQUEST = "FETCH_RECIPE_REQUEST";
+interface FetchRecipeRequestAction {
+  type: typeof FETCH_RECIPE_REQUEST;
+}
+export const FETCH_RECIPE_SUCCESS = "FETCH_RECIPE_SUCCESS";
+interface FetchRecipeSuccessAction {
+  type: typeof FETCH_RECIPE_SUCCESS;
+  payload: IRecipeModel;
+}
+export const FETCH_RECIPE_FAILURE = "FETCH_RECIPE_FAILURE";
+interface FetchRecipeFailureAction {
+  type: typeof FETCH_RECIPE_FAILURE;
+}
+
 export type ActionTypes =
   | FetchRecipesRequestAction
   | FetchRecipesSuccessAction
-  | FetchRecipesFailureAction;
+  | FetchRecipesFailureAction
+  | FetchRecipeRequestAction
+  | FetchRecipeSuccessAction
+  | FetchRecipeFailureAction;
 
 //
 // SYNC ACTION CREATORS
@@ -59,6 +76,17 @@ export const fetchRecipesFailure = (): ActionTypes => ({
   type: FETCH_RECIPES_FAILURE
 });
 
+export const fetchRecipeRequest = (): ActionTypes => ({
+  type: FETCH_RECIPE_REQUEST
+});
+export const fetchRecipeSuccess = (recipe: IRecipeModel): ActionTypes => ({
+  type: FETCH_RECIPE_SUCCESS,
+  payload: recipe
+});
+export const fetchRecipeFailure = (): ActionTypes => ({
+  type: FETCH_RECIPE_FAILURE
+});
+
 //
 // THUNK ACTION CREATORS
 // ---------------------
@@ -69,6 +97,19 @@ export const fetchRecipes = () => async (dispatch: Dispatch): Promise<void> => {
     dispatch(fetchRecipesSuccess(response.data));
   } catch (e) {
     dispatch(fetchRecipesFailure());
+    console.error(e);
+  }
+};
+
+export const fetchRecipe = (recipeId: string) => async (
+  dispatch: Dispatch
+): Promise<void> => {
+  dispatch(fetchRecipeRequest());
+  try {
+    const response = await client.fetchRecipe(recipeId);
+    dispatch(fetchRecipeSuccess(response.data));
+  } catch (e) {
+    dispatch(fetchRecipeFailure());
     console.error(e);
   }
 };
