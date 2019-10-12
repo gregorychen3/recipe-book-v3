@@ -62,7 +62,7 @@ recipeController.get("/", async (req, res, next) => {
 
 recipeController.get("/:id", async (req, res, next) => {
   const recipe = await Recipe.findOne({ _id: req.params.id });
-  return recipe ? res.sendStatus(404) : res.send(recipe);
+  return recipe ? res.send(recipe) : res.sendStatus(404);
 });
 
 recipeController.post(
