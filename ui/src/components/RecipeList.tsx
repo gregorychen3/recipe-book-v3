@@ -64,7 +64,14 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
     </>
   );
 
-  return groupBy === "course" ? renderByCourse() : renderByCuisine();
+  switch (groupBy) {
+    case "alphabetical":
+      return <div>alphabetical</div>;
+    case "course":
+      return renderByCourse();
+    case "cuisine":
+      return renderByCuisine();
+  }
 };
 
 export default RecipeList;

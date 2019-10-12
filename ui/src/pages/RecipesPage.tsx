@@ -8,7 +8,7 @@ import RecipeList from "../components/RecipeList";
 import { ActionTypes, fetchRecipes } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
-import { IGroupBy } from "../types";
+import { IGroupBy, IGroupByValues } from "../types";
 
 interface Props {
   recipes: IRecipeModel[];
@@ -22,9 +22,13 @@ const RecipesPage = ({ recipes, fetchRecipes }: Props) => {
   let location = useLocation();
   const parsed = queryString.parse(location.search);
   let groupBy: IGroupBy;
-  if (parsed.groupBy === "cuisine") {
-    groupBy = "cuisine";
-  } else groupBy = "course";
+  if (typeof parsed.groupBy !== "string") {
+    groupBy = "course";
+  } else if (IGroupByValues.includes(parsed.groupBy)) {
+    groupBy = parsed.groupBy as IGroupBy;
+  } else {
+    groupBy = "course";
+  }
 
   return (
     <section className="section">
