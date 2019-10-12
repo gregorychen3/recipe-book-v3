@@ -17,7 +17,7 @@ interface Props {
 const RecipesPage = ({ recipes, fetchRecipes }: Props) => {
   useEffect(() => {
     fetchRecipes();
-  }, []);
+  }, [fetchRecipes]);
 
   let location = useLocation();
   const parsed = queryString.parse(location.search);
