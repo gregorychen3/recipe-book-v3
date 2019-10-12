@@ -43,8 +43,6 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
     return <div>not found</div>;
   }
 
-  console.log(recipe.sources.length);
-
   return (
     <section className="section">
       <div className="container">
