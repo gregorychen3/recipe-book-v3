@@ -1,5 +1,10 @@
 @import 'bulma';
 @import '~bulma-extensions';
+
+.container {
+  max-width: 720px;
+}
+
 /*
 .App {
   text-align: center;
