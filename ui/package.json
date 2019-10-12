@@ -9,9 +9,11 @@
     "@types/react-dom": "^16.9.1",
     "@types/react-redux": "^7.1.4",
     "@types/react-router-dom": "^5.1.0",
+    "@types/yup": "^0.26.24",
     "axios": "^0.19.0",
     "bulma": "^0.7.5",
     "bulma-extensions": "^6.2.7",
+    "formik": "^1.5.8",
     "is-url": "^1.2.4",
     "node-sass": "^4.12.0",
     "react": "^16.10.2",
@@ -20,7 +22,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",

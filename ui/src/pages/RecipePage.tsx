@@ -9,6 +9,7 @@ import { capitalize } from "../helpers";
 import { ActionTypes, fetchRecipe } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
+import { RecipeForm } from "../components/RecipeForm";
 
 const getIngredientDisplay = (i: IIngredient) => {
   let display = "";
@@ -32,7 +33,7 @@ interface Props {
   recipes: IRecipeModel[];
   fetchRecipe: typeof fetchRecipe;
 }
-const RecipePage = ({ recipes, fetchRecipe }: Props) => {
+const RecipePage = ({ recipes, fetchRecipe, edit }: Props) => {
   let history = useHistory();
 
   let { recipeId } = useParams();
@@ -44,6 +45,10 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
   const recipe = recipes.find(r => r._id === recipeId);
   if (!recipe) {
     return <div>not found</div>;
+  }
+
+  if (edit) {
+    return <RecipeForm initialEmail="email@email" message="mymessage" />;
   }
 
   return (
