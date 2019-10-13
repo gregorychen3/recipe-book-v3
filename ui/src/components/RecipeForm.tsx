@@ -167,7 +167,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <span className="icon">
                   <i className="fas fa-save"></i>
                 </span>
-                <span>Submit</span>
+                <span>Save</span>
               </button>
             </p>
           </div>
