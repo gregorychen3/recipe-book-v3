@@ -83,93 +83,81 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <p className="level-item has-text-centered" />
           </nav>
 
-          {values.ingredients.length > 0 && (
-            <>
-              <div className="is-divider" data-content="INGREDIENTS" />
-              <div className="content">
-                <ul>
-                  {values.ingredients.map((ingredient, idx) => (
-                    <li key={idx}>
-                      <div className="field is-horizontal">
-                        <div className="field-body">
-                          <div className="field">
-                            <p className="control is-expanded">
-                              <input
-                                className="input"
-                                type="number"
-                                placeholder="Quantity"
-                                value={ingredient.qty}
-                              />
-                            </p>
-                          </div>
-                          <div className="field">
-                            <p className="control is-expanded">
-                              <input
-                                className="input"
-                                type="text"
-                                placeholder="Unit"
-                                value={ingredient.unit}
-                              />
-                            </p>
-                          </div>
-                          <div className="field">
-                            <p className="control is-expanded">
-                              <input
-                                className="input"
-                                type="text"
-                                placeholder="Name"
-                                value={ingredient.name}
-                              />
-                            </p>
-                          </div>
-                        </div>
+          <div className="is-divider" data-content="INGREDIENTS" />
+          <div className="content">
+            <ul>
+              {values.ingredients.map((ingredient, idx) => (
+                <li key={idx}>
+                  <div className="field is-horizontal">
+                    <div className="field-body">
+                      <div className="field">
+                        <p className="control is-expanded">
+                          <input
+                            className="input"
+                            type="number"
+                            placeholder="Quantity"
+                            value={ingredient.qty}
+                          />
+                        </p>
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          )}
+                      <div className="field">
+                        <p className="control is-expanded">
+                          <input
+                            className="input"
+                            type="text"
+                            placeholder="Unit"
+                            value={ingredient.unit}
+                          />
+                        </p>
+                      </div>
+                      <div className="field">
+                        <p className="control is-expanded">
+                          <input
+                            className="input"
+                            type="text"
+                            placeholder="Name"
+                            value={ingredient.name}
+                          />
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {values.instructions.length > 0 && (
-            <>
-              <div className="is-divider" data-content="INSTRUCTIONS" />
-              <div className="content">
-                <ol type="1">
-                  {values.instructions.map((instruction, idx) => (
-                    <li key={idx}>
-                      <input
-                        className="input"
-                        type="text"
-                        value={instruction}
-                        placeholder="Each step on its own line"
-                      />
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </>
-          )}
+          <div className="is-divider" data-content="INSTRUCTIONS" />
+          <div className="content">
+            <ol type="1">
+              {values.instructions.map((instruction, idx) => (
+                <li key={idx}>
+                  <input
+                    className="input"
+                    type="text"
+                    value={instruction}
+                    placeholder="Each step on its own line"
+                  />
+                </li>
+              ))}
+            </ol>
+          </div>
 
-          {values.sources.length > 0 && (
-            <>
-              <div className="is-divider" data-content="SOURCES" />
-              <div className="content">
-                <ul>
-                  {values.sources.map(s => (
-                    <li key={s}>
-                      <input
-                        className="input"
-                        type="text"
-                        value={s}
-                        placeholder="Enter source"
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          )}
+          <div className="is-divider" data-content="SOURCES" />
+          <div className="content">
+            <ul>
+              {values.sources.map(s => (
+                <li key={s}>
+                  <input
+                    className="input"
+                    type="text"
+                    value={s}
+                    placeholder="Enter source"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
     </Form>
