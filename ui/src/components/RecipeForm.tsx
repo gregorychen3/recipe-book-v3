@@ -1,6 +1,5 @@
 import { Form, FormikProps, withFormik } from "formik";
 import React from "react";
-import { useHistory } from "react-router";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
 import {
@@ -29,7 +28,6 @@ interface OtherProps {
 // Aside: You may see InjectedFormikProps<OtherProps, FormValues> instead of what comes below in older code.. InjectedFormikProps was artifact of when Formik only exported a HoC. It is also less flexible as it MUST wrap all props (it passes them through).
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const { touched, errors, isSubmitting } = props;
-  let history = useHistory();
   return (
     <Form>
       <section className="section">
@@ -41,14 +39,11 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               </span>
             </a>
             {props.values.name}
-            <a
-              onClick={() => history.push(`/recipes/${props.recipe._id}`)}
-              className="button is-white is-pulled-right"
-            >
+            <button type="submit" className="button is-white is-pulled-right">
               <span className="icon has-text-info is-small">
                 <i className="fas fa-save" />
               </span>
-            </a>
+            </button>
           </h1>
 
           <nav className="level">
@@ -227,6 +222,7 @@ export const RecipeForm = withFormik<MyFormProps, FormValues>({
   },
 
   handleSubmit: values => {
+    console.log("submitted");
     // do submitting things
   }
 })(InnerForm);
