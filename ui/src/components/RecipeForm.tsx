@@ -47,13 +47,19 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
         <nav className="level">
           <p className="level-item has-text-centered" />
           <p className="level-item has-text-centered">
-            <i className="fas fa-utensils" />
-            <div className="select" style={{ paddingLeft: 5 }}>
-              <select>
-                {ICourseValues.map(c => (
-                  <option value={c} label={c} />
-                ))}
-              </select>
+            <div className="field">
+              <div className="control has-icons-left">
+                <div className="select">
+                  <select>
+                    {ICourseValues.map(c => (
+                      <option value={c} label={c} />
+                    ))}
+                  </select>
+                </div>
+                <div className="icon is-small is-left">
+                  <i className="fas fa-utensils"></i>
+                </div>
+              </div>
             </div>
           </p>
           <p className="level-item has-text-centered">
