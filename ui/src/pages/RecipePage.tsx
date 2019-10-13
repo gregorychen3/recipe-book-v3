@@ -55,7 +55,7 @@ const RecipePage = ({ recipes, fetchRecipe, edit }: Props) => {
     <section className="section">
       <div className="container">
         <h1 className="title has-text-centered">
-          <a className="button is-white is-pulled-left is-invisible">
+          <a className="button is-white is-pulled-left is-invisible" href="#/">
             <span className="icon has-text-info is-small">
               <i className="fas fa-edit" />
             </span>
@@ -64,6 +64,7 @@ const RecipePage = ({ recipes, fetchRecipe, edit }: Props) => {
           <a
             onClick={() => history.push(`/recipes/${recipeId}/edit`)}
             className="button is-white is-pulled-right"
+            href="#/"
           >
             <span className="icon has-text-info is-small">
               <i className="fas fa-edit" />
