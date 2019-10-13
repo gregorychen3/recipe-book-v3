@@ -147,20 +147,20 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
           <div className="content">
             <FieldArray
               name="instructions"
-              render={instructionsHelpers => (
-                <ol>
-                  {values.instructions.map((instruction, idx) => (
-                    <li key={idx}>
+              render={instructionsHelpers =>
+                values.instructions.map((instruction, idx) => (
+                  <div className="field">
+                    <div className="control">
                       <Field
                         name={`instructions.${idx}`}
                         type="text"
                         placeholder="Each step on its own line"
                         className="input"
                       />
-                    </li>
-                  ))}
-                </ol>
-              )}
+                    </div>
+                  </div>
+                ))
+              }
             />
           </div>
 
