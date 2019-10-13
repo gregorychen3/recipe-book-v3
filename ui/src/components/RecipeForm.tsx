@@ -32,7 +32,17 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     <Form>
       <section className="section">
         <div className="container">
-          <h1 className="title has-text-centered">{values.name}</h1>
+          <div className="field">
+            <div className="control">
+              <input
+                name="name"
+                value={values.name}
+                type="text"
+                placeholder="Title"
+                className="input is-large has-text-centered"
+              />
+            </div>
+          </div>
 
           <nav className="level">
             <p className="level-item has-text-centered" />
