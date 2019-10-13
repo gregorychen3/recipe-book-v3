@@ -27,7 +27,7 @@ interface OtherProps {
 
 // Aside: You may see InjectedFormikProps<OtherProps, FormValues> instead of what comes below in older code.. InjectedFormikProps was artifact of when Formik only exported a HoC. It is also less flexible as it MUST wrap all props (it passes them through).
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
-  const { touched, errors, isSubmitting } = props;
+  const { values, touched, errors, isSubmitting } = props;
   return (
     <Form>
       <section className="section">
@@ -83,12 +83,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <p className="level-item has-text-centered" />
           </nav>
 
-          {props.recipe.ingredients.length > 0 && (
+          {props.values.ingredients.length > 0 && (
             <>
               <div className="is-divider" data-content="INGREDIENTS" />
               <div className="content">
                 <ul>
-                  {props.recipe.ingredients.map((ingredient, idx) => (
+                  {props.values.ingredients.map((ingredient, idx) => (
                     <li key={idx}>
                       <div className="field is-horizontal">
                         <div className="field-body">
@@ -131,12 +131,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             </>
           )}
 
-          {props.recipe.instructions.length > 0 && (
+          {props.values.instructions.length > 0 && (
             <>
               <div className="is-divider" data-content="INSTRUCTIONS" />
               <div className="content">
                 <ol type="1">
-                  {props.recipe.instructions.map((instruction, idx) => (
+                  {props.values.instructions.map((instruction, idx) => (
                     <li key={idx}>
                       <input
                         className="input"
@@ -151,12 +151,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             </>
           )}
 
-          {props.recipe.sources.length > 0 && (
+          {props.values.sources.length > 0 && (
             <>
               <div className="is-divider" data-content="SOURCES" />
               <div className="content">
                 <ul>
-                  {props.recipe.sources.map(s => (
+                  {props.values.sources.map(s => (
                     <li key={s}>
                       <input
                         className="input"
@@ -192,6 +192,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   );*/
 };
 
+const getDefaultIngredient = (): IIngredient => ({ name: "" });
+
 // The type of props MyForm receives
 interface MyFormProps {
   recipe: IRecipeModel; // if this passed all the way through you might do this or make a union type
@@ -215,14 +217,13 @@ export const RecipeForm = withFormik<MyFormProps, FormValues>({
       course,
       cuisine,
       servings,
-      ingredients,
-      instructions,
-      sources
+      ingredients: [...ingredients, getDefaultIngredient()],
+      instructions: [...instructions, ""],
+      sources: [...sources, ""]
     };
   },
 
   handleSubmit: values => {
-    console.log("submitted");
-    // do submitting things
+    console.log(JSON.stringify(values, null, 2));
   }
 })(InnerForm);
