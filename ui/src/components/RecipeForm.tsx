@@ -62,7 +62,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <label className="label">Course</label>
                 <div className="control is-expanded has-icons-left">
                   <div className="select is-fullwidth">
-                    <select name="course">
+                    <select name="course" value={values.course}>
                       {ICourseValues.map(c => (
                         <option value={c} label={capitalize(c)} key={c} />
                       ))}
@@ -80,7 +80,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <label className="label">Cuisine</label>
                 <div className="control is-expanded has-icons-left">
                   <div className="select is-fullwidth">
-                    <select name="course">
+                    <select name="cuisine" value={values.cuisine}>
                       {ICuisineValues.map(c => (
                         <option value={c} label={capitalize(c)} key={c} />
                       ))}
