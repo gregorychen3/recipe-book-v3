@@ -82,48 +82,48 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
           <div className="content">
             <FieldArray
               name="ingredients"
-              render={ingredientsHelpers => (
-                <ul>
-                  {values.ingredients.map((ingredient, idx) => (
-                    <li key={idx}>
-                      <div className="field is-horizontal">
-                        <div className="field-body">
-                          <div className="field">
-                            <p className="control is-expanded">
-                              <Field
-                                name={`ingredients.${idx}.qty`}
-                                type="number"
-                                placeholder="Quantity"
-                                className="input"
-                              />
-                            </p>
-                          </div>
-                          <div className="field">
-                            <p className="control is-expanded">
-                              <Field
-                                name={`ingredients.${idx}.unit`}
-                                type="text"
-                                placeholder="Unit"
-                                className="input"
-                              />
-                            </p>
-                          </div>
-                          <div className="field">
-                            <p className="control is-expanded">
-                              <Field
-                                name={`ingredients.${idx}.name`}
-                                type="text"
-                                placeholder="Name"
-                                className="input"
-                              />
-                            </p>
-                          </div>
-                        </div>
+              render={ingredientsHelpers =>
+                values.ingredients.map((ingredient, idx) => (
+                  <div className="columns">
+                    <div className="column is-one-quarter">
+                      <div className="field">
+                        <p className="control is-expanded">
+                          <Field
+                            name={`ingredients.${idx}.qty`}
+                            type="number"
+                            placeholder="Quantity"
+                            className="input"
+                          />
+                        </p>
                       </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
+                    </div>
+                    <div className="column is-one-quarter">
+                      <div className="field">
+                        <p className="control is-expanded">
+                          <Field
+                            name={`ingredients.${idx}.unit`}
+                            type="text"
+                            placeholder="Unit"
+                            className="input"
+                          />
+                        </p>
+                      </div>
+                    </div>
+                    <div className="column is-half">
+                      <div className="field">
+                        <p className="control is-expanded">
+                          <Field
+                            name={`ingredients.${idx}.name`}
+                            type="text"
+                            placeholder="Name"
+                            className="input"
+                          />
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
             />
           </div>
 
