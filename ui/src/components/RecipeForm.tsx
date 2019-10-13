@@ -1,4 +1,5 @@
 import { Field, FieldArray, Form, FormikProps, withFormik } from "formik";
+import _ from "lodash";
 import React from "react";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
@@ -10,7 +11,6 @@ import {
   IIngredient
 } from "../types";
 
-// Shape of form values
 interface FormValues {
   name: string;
   course: ICourse;
@@ -20,14 +20,12 @@ interface FormValues {
   instructions: string[];
   sources: string[];
 }
-
 interface OtherProps {
   recipe: IRecipeModel;
 }
-
-// Aside: You may see InjectedFormikProps<OtherProps, FormValues> instead of what comes below in older code.. InjectedFormikProps was artifact of when Formik only exported a HoC. It is also less flexible as it MUST wrap all props (it passes them through).
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const { values, touched, errors, isSubmitting } = props;
+  console.log(touched);
   return (
     <Form>
       <section className="section">
@@ -176,7 +174,11 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               <a className="button is-light">Cancel</a>
             </p>
             <p className="control">
-              <button type="submit" className="button is-primary">
+              <button
+                type="submit"
+                disabled={_.isEmpty(touched) || isSubmitting}
+                className="button is-primary"
+              >
                 <span className="icon">
                   <i className="fas fa-save"></i>
                 </span>
