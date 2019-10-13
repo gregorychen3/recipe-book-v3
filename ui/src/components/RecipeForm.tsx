@@ -30,7 +30,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     isSubmitting,
     handleChange,
     handleBlur,
-    dirty
+    dirty,
+    setFieldValue
   } = props;
   return (
     <Form>
@@ -164,7 +165,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <FieldArray
               name="instructions"
               render={instructionsHelpers =>
-                values.instructions.map((instruction, idx) => (
+                values.instructions.map((instruction, idx, instructions) => (
                   <div className="field">
                     <div className="control">
                       <Field
@@ -172,6 +173,15 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                         type="text"
                         placeholder="Each step on its own line"
                         className="input"
+                        onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                          setFieldValue(
+                            `instructions.${idx}`,
+                            e.currentTarget.value
+                          );
+                          if (idx === instructions.length - 1) {
+                            instructionsHelpers.push("");
+                          }
+                        }}
                       />
                     </div>
                   </div>
