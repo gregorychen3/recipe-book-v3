@@ -93,7 +93,42 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <div className="content">
               <ul>
                 {props.recipe.ingredients.map(i => (
-                  <li>{JSON.stringify(i)}</li>
+                  <li>
+                    <div className="field is-horizontal">
+                      <div className="field-body">
+                        <div className="field">
+                          <p className="control is-expanded">
+                            <input
+                              className="input"
+                              type="number"
+                              placeholder="Quantity"
+                              value={i.qty}
+                            />
+                          </p>
+                        </div>
+                        <div className="field">
+                          <p className="control is-expanded">
+                            <input
+                              className="input"
+                              type="text"
+                              placeholder="Unit"
+                              value={i.unit}
+                            />
+                          </p>
+                        </div>
+                        <div className="field">
+                          <p className="control is-expanded">
+                            <input
+                              className="input"
+                              type="text"
+                              placeholder="Name"
+                              value={i.name}
+                            />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
                 ))}
               </ul>
             </div>
