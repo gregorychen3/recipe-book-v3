@@ -1,5 +1,4 @@
 import { Field, FieldArray, Form, FormikProps, withFormik } from "formik";
-import _ from "lodash";
 import React from "react";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
@@ -33,7 +32,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     handleBlur,
     dirty
   } = props;
-  console.log(touched);
   return (
     <Form>
       <section className="section">
