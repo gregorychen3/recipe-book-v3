@@ -42,13 +42,27 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             </div>
           </div>
 
-          <nav className="level">
-            <p className="level-item has-text-centered" />
-            <div className="level-item has-text-centered">
+          <div className="columns">
+            <div className="column">
               <div className="field">
-                <div className="control has-icons-left">
-                  <div className="select">
-                    <select>
+                <label className="label">Servings</label>
+                <div className="control">
+                  <Field
+                    name="servings"
+                    type="number"
+                    placeholder="Must be > 0"
+                    className="input"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="column">
+              <div className="field">
+                <label className="label">Course</label>
+                <div className="control is-expanded has-icons-left">
+                  <div className="select is-fullwidth">
+                    <select name="course">
                       {ICourseValues.map(c => (
                         <option value={c} label={capitalize(c)} key={c} />
                       ))}
@@ -60,11 +74,13 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 </div>
               </div>
             </div>
-            <div className="level-item has-text-centered">
+
+            <div className="column">
               <div className="field">
-                <div className="control has-icons-left">
-                  <div className="select">
-                    <select>
+                <label className="label">Cuisine</label>
+                <div className="control is-expanded has-icons-left">
+                  <div className="select is-fullwidth">
+                    <select name="course">
                       {ICuisineValues.map(c => (
                         <option value={c} label={capitalize(c)} key={c} />
                       ))}
@@ -76,8 +92,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 </div>
               </div>
             </div>
-            <p className="level-item has-text-centered" />
-          </nav>
+          </div>
 
           <div className="is-divider" data-content="INGREDIENTS" />
           <div className="content">
