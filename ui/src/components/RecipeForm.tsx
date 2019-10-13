@@ -116,8 +116,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <FieldArray
               name="ingredients"
               render={ingredientsHelpers =>
-                values.ingredients.map((ingredient, idx) => (
-                  <div className="columns">
+                values.ingredients.map((ingredient, idx, ingredients) => (
+                  <div className="columns" key={idx}>
                     <div className="column is-one-quarter">
                       <div className="field">
                         <p className="control is-expanded">
@@ -150,6 +150,17 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                             type="text"
                             placeholder="Name"
                             className="input"
+                            onChange={(
+                              e: React.FormEvent<HTMLInputElement>
+                            ) => {
+                              setFieldValue(
+                                `ingredients.${idx}.name`,
+                                e.currentTarget.value
+                              );
+                              if (idx === ingredients.length - 1) {
+                                ingredientsHelpers.push(getDefaultIngredient());
+                              }
+                            }}
                           />
                         </p>
                       </div>
@@ -166,7 +177,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               name="instructions"
               render={instructionsHelpers =>
                 values.instructions.map((instruction, idx, instructions) => (
-                  <div className="field">
+                  <div className="field" key={idx}>
                     <div className="control">
                       <Field
                         name={`instructions.${idx}`}
@@ -196,7 +207,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               name="sources"
               render={sourcesHelpers =>
                 values.sources.map((source, idx, sources) => (
-                  <div className="field">
+                  <div className="field" key={idx}>
                     <div className="control">
                       <Field
                         name={`sources.${idx}`}
