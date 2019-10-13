@@ -38,7 +38,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <i className="fas fa-edit" />
               </span>
             </a>
-            {props.values.name}
+            {values.name}
             <button type="submit" className="button is-white is-pulled-right">
               <span className="icon has-text-info is-small">
                 <i className="fas fa-save" />
@@ -83,12 +83,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <p className="level-item has-text-centered" />
           </nav>
 
-          {props.values.ingredients.length > 0 && (
+          {values.ingredients.length > 0 && (
             <>
               <div className="is-divider" data-content="INGREDIENTS" />
               <div className="content">
                 <ul>
-                  {props.values.ingredients.map((ingredient, idx) => (
+                  {values.ingredients.map((ingredient, idx) => (
                     <li key={idx}>
                       <div className="field is-horizontal">
                         <div className="field-body">
@@ -131,12 +131,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             </>
           )}
 
-          {props.values.instructions.length > 0 && (
+          {values.instructions.length > 0 && (
             <>
               <div className="is-divider" data-content="INSTRUCTIONS" />
               <div className="content">
                 <ol type="1">
-                  {props.values.instructions.map((instruction, idx) => (
+                  {values.instructions.map((instruction, idx) => (
                     <li key={idx}>
                       <input
                         className="input"
@@ -151,12 +151,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             </>
           )}
 
-          {props.values.sources.length > 0 && (
+          {values.sources.length > 0 && (
             <>
               <div className="is-divider" data-content="SOURCES" />
               <div className="content">
                 <ul>
-                  {props.values.sources.map(s => (
+                  {values.sources.map(s => (
                     <li key={s}>
                       <input
                         className="input"
