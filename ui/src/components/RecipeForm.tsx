@@ -3,7 +3,13 @@ import React from "react";
 import { useHistory } from "react-router";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
-import { ICourse, ICourseValues, ICuisine, IIngredient } from "../types";
+import {
+  ICourse,
+  ICourseValues,
+  ICuisine,
+  ICuisineValues,
+  IIngredient
+} from "../types";
 
 // Shape of form values
 interface FormValues {
@@ -52,7 +58,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <div className="select">
                   <select>
                     {ICourseValues.map(c => (
-                      <option value={c} label={c} />
+                      <option value={c} label={capitalize(c)} />
                     ))}
                   </select>
                 </div>
@@ -63,10 +69,20 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             </div>
           </p>
           <p className="level-item has-text-centered">
-            <i className="fas fa-globe" />
-            <span style={{ paddingLeft: 5 }}>
-              {capitalize(props.recipe.cuisine)}
-            </span>
+            <div className="field">
+              <div className="control has-icons-left">
+                <div className="select">
+                  <select>
+                    {ICuisineValues.map(c => (
+                      <option value={c} label={capitalize(c)} />
+                    ))}
+                  </select>
+                </div>
+                <div className="icon is-small is-left">
+                  <i className="fas fa-globe"></i>
+                </div>
+              </div>
+            </div>
           </p>
           <p className="level-item has-text-centered" />
         </nav>
