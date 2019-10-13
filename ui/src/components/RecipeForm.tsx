@@ -195,7 +195,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <FieldArray
               name="sources"
               render={sourcesHelpers =>
-                values.sources.map((source, idx) => (
+                values.sources.map((source, idx, sources) => (
                   <div className="field">
                     <div className="control">
                       <Field
@@ -203,6 +203,15 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                         type="text"
                         placeholder="Enter source"
                         className="input"
+                        onChange={(e: React.FormEvent<HTMLInputElement>) => {
+                          setFieldValue(
+                            `sources.${idx}`,
+                            e.currentTarget.value
+                          );
+                          if (idx === sources.length - 1) {
+                            sourcesHelpers.push("");
+                          }
+                        }}
                       />
                     </div>
                   </div>
