@@ -24,7 +24,14 @@ interface OtherProps {
   recipe: IRecipeModel;
 }
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
-  const { values, touched, errors, isSubmitting } = props;
+  const {
+    values,
+    touched,
+    errors,
+    isSubmitting,
+    handleChange,
+    handleBlur
+  } = props;
   console.log(touched);
   return (
     <Form>
@@ -62,7 +69,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <label className="label">Course</label>
                 <div className="control is-expanded has-icons-left">
                   <div className="select is-fullwidth">
-                    <select name="course" value={values.course}>
+                    <select
+                      name="course"
+                      value={values.course}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    >
                       {ICourseValues.map(c => (
                         <option value={c} label={capitalize(c)} key={c} />
                       ))}
@@ -80,7 +92,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 <label className="label">Cuisine</label>
                 <div className="control is-expanded has-icons-left">
                   <div className="select is-fullwidth">
-                    <select name="cuisine" value={values.cuisine}>
+                    <select
+                      name="cuisine"
+                      value={values.cuisine}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    >
                       {ICuisineValues.map(c => (
                         <option value={c} label={capitalize(c)} key={c} />
                       ))}
@@ -192,7 +209,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <p className="control">
               <button
                 type="submit"
-                disabled={_.isEmpty(touched) || isSubmitting}
+                disabled={_.isEmpty(touched)}
                 className="button is-primary"
               >
                 <span className="icon">
