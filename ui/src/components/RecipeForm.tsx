@@ -161,7 +161,14 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <div className="content">
               <ul>
                 {props.recipe.sources.map(s => (
-                  <li>{JSON.stringify(s)}</li>
+                  <li>
+                    <input
+                      className="input"
+                      type="text"
+                      value={s}
+                      placeholder="Enter source"
+                    />
+                  </li>
                 ))}
               </ul>
             </div>
