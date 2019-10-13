@@ -45,7 +45,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             className="button is-white is-pulled-right"
           >
             <span className="icon has-text-info is-small">
-              <i className="fas fa-edit" />
+              <i className="fas fa-save" />
             </span>
           </a>
         </h1>
