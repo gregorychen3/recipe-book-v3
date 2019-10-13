@@ -158,6 +158,19 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               ))}
             </ul>
           </div>
+          <div className="field is-grouped is-grouped-right">
+            <p className="control">
+              <a className="button is-light">Cancel</a>
+            </p>
+            <p className="control">
+              <button type="submit" className="button is-primary">
+                <span className="icon">
+                  <i className="fas fa-save"></i>
+                </span>
+                <span>Submit</span>
+              </button>
+            </p>
+          </div>
         </div>
       </section>
     </Form>
