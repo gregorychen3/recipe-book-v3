@@ -31,12 +31,13 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
       <section className="section">
         <div className="container">
           <div className="field">
+            <label className="label">Recipe Name</label>
             <div className="control">
               <Field
                 name="name"
                 type="text"
                 placeholder="Title"
-                className="input is-large has-text-centered"
+                className="input"
               />
             </div>
           </div>
