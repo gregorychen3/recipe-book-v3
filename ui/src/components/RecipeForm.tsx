@@ -1,4 +1,4 @@
-import { Form, FormikProps, withFormik } from "formik";
+import { Form, FormikProps, withFormik, Field } from "formik";
 import React from "react";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
@@ -34,9 +34,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
         <div className="container">
           <div className="field">
             <div className="control">
-              <input
+              <Field
                 name="name"
-                value={values.name}
                 type="text"
                 placeholder="Title"
                 className="input is-large has-text-centered"
