@@ -147,19 +147,25 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
           <div className="is-divider" data-content="SOURCES" />
           <div className="content">
-            <ul>
-              {values.sources.map(s => (
-                <li key={s}>
-                  <input
-                    className="input"
-                    type="text"
-                    value={s}
-                    placeholder="Enter source"
-                  />
-                </li>
-              ))}
-            </ul>
+            <FieldArray
+              name="sources"
+              render={sourcesHelpers => (
+                <ul>
+                  {values.sources.map((source, idx) => (
+                    <li key={idx}>
+                      <Field
+                        name={`sources.${idx}`}
+                        type="text"
+                        placeholder="Enter source"
+                        className="input"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            />
           </div>
+
           <div className="field is-grouped is-grouped-right">
             <p className="control">
               <a className="button is-light">Cancel</a>
