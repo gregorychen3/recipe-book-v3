@@ -1,4 +1,4 @@
-import { Form, FormikProps, withFormik, Field } from "formik";
+import { Field, FieldArray, Form, FormikProps, withFormik } from "formik";
 import React from "react";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
@@ -126,18 +126,23 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
           <div className="is-divider" data-content="INSTRUCTIONS" />
           <div className="content">
-            <ol type="1">
-              {values.instructions.map((instruction, idx) => (
-                <li key={idx}>
-                  <input
-                    className="input"
-                    type="text"
-                    value={instruction}
-                    placeholder="Each step on its own line"
-                  />
-                </li>
-              ))}
-            </ol>
+            <FieldArray
+              name="instructions"
+              render={instructionsHelpers => (
+                <ol>
+                  {values.instructions.map((instruction, idx) => (
+                    <li key={idx}>
+                      <Field
+                        name={`instructions.${idx}`}
+                        type="text"
+                        placeholder="Each step on its own line"
+                        className="input"
+                      />
+                    </li>
+                  ))}
+                </ol>
+              )}
+            />
           </div>
 
           <div className="is-divider" data-content="SOURCES" />
