@@ -82,46 +82,51 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
           <div className="is-divider" data-content="INGREDIENTS" />
           <div className="content">
-            <ul>
-              {values.ingredients.map((ingredient, idx) => (
-                <li key={idx}>
-                  <div className="field is-horizontal">
-                    <div className="field-body">
-                      <div className="field">
-                        <p className="control is-expanded">
-                          <input
-                            className="input"
-                            type="number"
-                            placeholder="Quantity"
-                            value={ingredient.qty}
-                          />
-                        </p>
+            <FieldArray
+              name="ingredients"
+              render={ingredientsHelpers => (
+                <ul>
+                  {values.ingredients.map((ingredient, idx) => (
+                    <li key={idx}>
+                      <div className="field is-horizontal">
+                        <div className="field-body">
+                          <div className="field">
+                            <p className="control is-expanded">
+                              <Field
+                                name={`ingredients.${idx}.qty`}
+                                type="number"
+                                placeholder="Quantity"
+                                className="input"
+                              />
+                            </p>
+                          </div>
+                          <div className="field">
+                            <p className="control is-expanded">
+                              <Field
+                                name={`ingredients.${idx}.unit`}
+                                type="text"
+                                placeholder="Unit"
+                                className="input"
+                              />
+                            </p>
+                          </div>
+                          <div className="field">
+                            <p className="control is-expanded">
+                              <Field
+                                name={`ingredients.${idx}.name`}
+                                type="text"
+                                placeholder="Name"
+                                className="input"
+                              />
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="field">
-                        <p className="control is-expanded">
-                          <input
-                            className="input"
-                            type="text"
-                            placeholder="Unit"
-                            value={ingredient.unit}
-                          />
-                        </p>
-                      </div>
-                      <div className="field">
-                        <p className="control is-expanded">
-                          <input
-                            className="input"
-                            type="text"
-                            placeholder="Name"
-                            value={ingredient.name}
-                          />
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            />
           </div>
 
           <div className="is-divider" data-content="INSTRUCTIONS" />
