@@ -52,13 +52,13 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
         <nav className="level">
           <p className="level-item has-text-centered" />
-          <p className="level-item has-text-centered">
+          <div className="level-item has-text-centered">
             <div className="field">
               <div className="control has-icons-left">
                 <div className="select">
                   <select>
                     {ICourseValues.map(c => (
-                      <option value={c} label={capitalize(c)} />
+                      <option value={c} label={capitalize(c)} key={c} />
                     ))}
                   </select>
                 </div>
@@ -67,14 +67,14 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 </div>
               </div>
             </div>
-          </p>
-          <p className="level-item has-text-centered">
+          </div>
+          <div className="level-item has-text-centered">
             <div className="field">
               <div className="control has-icons-left">
                 <div className="select">
                   <select>
                     {ICuisineValues.map(c => (
-                      <option value={c} label={capitalize(c)} />
+                      <option value={c} label={capitalize(c)} key={c} />
                     ))}
                   </select>
                 </div>
@@ -83,7 +83,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 </div>
               </div>
             </div>
-          </p>
+          </div>
           <p className="level-item has-text-centered" />
         </nav>
 
@@ -92,8 +92,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <div className="is-divider" data-content="INGREDIENTS" />
             <div className="content">
               <ul>
-                {props.recipe.ingredients.map(i => (
-                  <li>
+                {props.recipe.ingredients.map((ingredient, idx) => (
+                  <li key={idx}>
                     <div className="field is-horizontal">
                       <div className="field-body">
                         <div className="field">
@@ -102,7 +102,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                               className="input"
                               type="number"
                               placeholder="Quantity"
-                              value={i.qty}
+                              value={ingredient.qty}
                             />
                           </p>
                         </div>
@@ -112,7 +112,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                               className="input"
                               type="text"
                               placeholder="Unit"
-                              value={i.unit}
+                              value={ingredient.unit}
                             />
                           </p>
                         </div>
@@ -122,7 +122,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                               className="input"
                               type="text"
                               placeholder="Name"
-                              value={i.name}
+                              value={ingredient.name}
                             />
                           </p>
                         </div>
@@ -140,12 +140,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <div className="is-divider" data-content="INSTRUCTIONS" />
             <div className="content">
               <ol type="1">
-                {props.recipe.instructions.map(i => (
-                  <li>
+                {props.recipe.instructions.map((instruction, idx) => (
+                  <li key={idx}>
                     <input
                       className="input"
                       type="text"
-                      value={i}
+                      value={instruction}
                       placeholder="Each step on its own line"
                     />
                   </li>
@@ -161,7 +161,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <div className="content">
               <ul>
                 {props.recipe.sources.map(s => (
-                  <li>
+                  <li key={s}>
                     <input
                       className="input"
                       type="text"
