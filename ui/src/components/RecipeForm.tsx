@@ -106,7 +106,14 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <div className="content">
               <ol type="1">
                 {props.recipe.instructions.map(i => (
-                  <li>{i}</li>
+                  <li>
+                    <input
+                      className="input"
+                      type="text"
+                      value={i}
+                      placeholder="Each step on its own line"
+                    />
+                  </li>
                 ))}
               </ol>
             </div>
