@@ -30,7 +30,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     errors,
     isSubmitting,
     handleChange,
-    handleBlur
+    handleBlur,
+    dirty
   } = props;
   console.log(touched);
   return (
@@ -209,7 +210,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <p className="control">
               <button
                 type="submit"
-                disabled={_.isEmpty(touched)}
+                disabled={!dirty}
                 className="button is-primary"
               >
                 <span className="icon">
