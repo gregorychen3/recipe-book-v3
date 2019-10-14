@@ -5,10 +5,9 @@ import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { IIngredient } from "../../../src/types";
-import apiClient from "../apiClient";
 import { RecipeForm } from "../components/RecipeForm";
 import { capitalize } from "../helpers";
-import { ActionTypes, fetchRecipe } from "../redux/actions";
+import { ActionTypes, fetchRecipe, updateRecipe } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
 import { IRecipe } from "../types";
@@ -34,8 +33,9 @@ interface Props {
   edit: boolean;
   recipes: IRecipeModel[];
   fetchRecipe: typeof fetchRecipe;
+  updateRecipe: typeof updateRecipe;
 }
-const RecipePage = ({ recipes, fetchRecipe, edit }: Props) => {
+const RecipePage = ({ recipes, fetchRecipe, updateRecipe, edit }: Props) => {
   let history = useHistory();
 
   let { recipeId } = useParams();
@@ -54,7 +54,7 @@ const RecipePage = ({ recipes, fetchRecipe, edit }: Props) => {
       <RecipeForm
         recipe={recipe}
         onSubmit={(recipeId: string, recipe: IRecipe) => {
-          apiClient.updateRecipe(recipeId, recipe);
+          updateRecipe(recipeId, recipe);
           history.push(`/recipes/${recipeId}`);
         }}
       />
@@ -140,7 +140,7 @@ const RecipePage = ({ recipes, fetchRecipe, edit }: Props) => {
 
 const mapStateToProps = (state: RootState) => ({ recipes: recipes(state) });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators({ fetchRecipe }, dispatch);
+  bindActionCreators({ fetchRecipe, updateRecipe }, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
