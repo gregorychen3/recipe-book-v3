@@ -8,6 +8,7 @@ import {
 import "./App.scss";
 import Navbar from "./components/Navbar";
 import AboutPage from "./pages/AboutPage";
+import EditRecipePage from "./pages/EditRecipePage";
 import RecipePage from "./pages/RecipePage";
 import RecipesPage from "./pages/RecipesPage";
 
@@ -23,7 +24,7 @@ function App() {
           <RecipesPage />
         </Route>
         <Route exact path="/recipes/:recipeId/edit">
-          <RecipePage edit={true} />
+          <EditRecipePage />
         </Route>
         <Route exact path="/recipes/:recipeId">
           <RecipePage edit={false} />
