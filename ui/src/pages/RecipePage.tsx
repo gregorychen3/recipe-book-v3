@@ -5,11 +5,13 @@ import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { IIngredient } from "../../../src/types";
+import apiClient from "../apiClient";
+import { RecipeForm } from "../components/RecipeForm";
 import { capitalize } from "../helpers";
 import { ActionTypes, fetchRecipe } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
-import { RecipeForm } from "../components/RecipeForm";
+import { IRecipe } from "../types";
 
 const getIngredientDisplay = (i: IIngredient) => {
   let display = "";
@@ -48,7 +50,15 @@ const RecipePage = ({ recipes, fetchRecipe, edit }: Props) => {
   }
 
   if (edit) {
-    return <RecipeForm recipe={recipe} />;
+    return (
+      <RecipeForm
+        recipe={recipe}
+        onSubmit={(recipeId: string, recipe: IRecipe) => {
+          apiClient.updateRecipe(recipeId, recipe);
+          history.push(`/recipes/${recipeId}`);
+        }}
+      />
+    );
   }
 
   return (

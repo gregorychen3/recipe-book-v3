@@ -7,7 +7,8 @@ import {
   ICourseValues,
   ICuisine,
   ICuisineValues,
-  IIngredient
+  IIngredient,
+  IRecipe
 } from "../types";
 
 interface IngredientValues {
@@ -292,8 +293,26 @@ const getIngredientValues = (
   }));
 };
 
+const recipeFromValues = (values: FormValues): IRecipe => ({
+  name: values.name,
+  course: values.course,
+  cuisine: values.cuisine,
+  servings: values.servings,
+  ingredients: values.ingredients
+    .filter(i => i.name)
+    .map(i => {
+      const ingredient: IIngredient = { name: i.name };
+      i.qty && (ingredient.qty = i.qty);
+      i.unit && (ingredient.unit = i.unit);
+      return ingredient;
+    }),
+  instructions: values.instructions.filter(i => i),
+  sources: values.sources.filter(s => s)
+});
+
 interface MyFormProps {
   recipe: IRecipeModel;
+  onSubmit: (recipeId: string, recipe: IRecipe) => void;
 }
 export const RecipeForm = withFormik<MyFormProps, FormValues>({
   mapPropsToValues: props => {
@@ -320,7 +339,9 @@ export const RecipeForm = withFormik<MyFormProps, FormValues>({
     };
   },
 
-  handleSubmit: values => {
-    console.log(JSON.stringify(values, null, 2));
+  handleSubmit: (values, formikBag) => {
+    const { recipe, onSubmit } = formikBag.props;
+    const updatedRecipe = recipeFromValues(values);
+    onSubmit(recipe._id, updatedRecipe);
   }
 })(InnerForm);
