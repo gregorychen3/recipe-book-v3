@@ -5,12 +5,10 @@ import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { IIngredient } from "../../../src/types";
-import { RecipeForm } from "../components/RecipeForm";
 import { capitalize } from "../helpers";
 import { ActionTypes, fetchRecipe, updateRecipe } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
-import { IRecipe } from "../types";
 
 const getIngredientDisplay = (i: IIngredient, scalingFactor: number) => {
   let display = "";
@@ -149,8 +147,8 @@ const RecipePage = ({ recipes, fetchRecipe, updateRecipe }: Props) => {
             <div className="is-divider" data-content="SOURCES" />
             <div className="content">
               <ul>
-                {recipe.sources.map(s => (
-                  <li>{getSourceDisplay(s)}</li>
+                {recipe.sources.map((s, idx) => (
+                  <li key={idx}>{getSourceDisplay(s)}</li>
                 ))}
               </ul>
             </div>
