@@ -32,7 +32,6 @@ interface OtherProps {
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
     values,
-    touched,
     errors,
     isSubmitting,
     handleChange,
