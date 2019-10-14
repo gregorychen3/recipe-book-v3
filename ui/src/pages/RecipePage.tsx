@@ -1,5 +1,5 @@
 import isUrl from "is-url";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
@@ -12,9 +12,9 @@ import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
 import { IRecipe } from "../types";
 
-const getIngredientDisplay = (i: IIngredient) => {
+const getIngredientDisplay = (i: IIngredient, scalingFactor: number) => {
   let display = "";
-  i.qty && (display += `${i.qty} `);
+  i.qty && (display += `${i.qty * scalingFactor} `);
   i.unit && (display += `${i.unit} `);
   display += i.name;
   return display;
@@ -41,14 +41,25 @@ const RecipePage = ({ recipes, fetchRecipe, updateRecipe, edit }: Props) => {
   let { recipeId } = useParams();
 
   useEffect(() => {
-    fetchRecipe(recipeId!);
+    if (!recipeId) {
+      return;
+    }
+    fetchRecipe(recipeId);
   }, [fetchRecipe, recipeId]);
 
   const recipe = recipes.find(r => r._id === recipeId);
-  if (!recipe) {
-    return <div>not found</div>;
-  }
 
+  const [servingsState, setServingsState] = useState(1);
+  useEffect(() => {
+    if (!recipe) {
+      return;
+    }
+    setServingsState(recipe.servings);
+  }, [recipe]);
+
+  if (!recipe) {
+    return null;
+  }
   if (edit) {
     return (
       <RecipeForm
@@ -60,7 +71,6 @@ const RecipePage = ({ recipes, fetchRecipe, updateRecipe, edit }: Props) => {
       />
     );
   }
-
   return (
     <section className="section">
       <div className="container">
@@ -104,21 +114,28 @@ const RecipePage = ({ recipes, fetchRecipe, updateRecipe, edit }: Props) => {
                   <p className="control">
                     <input
                       type="number"
+                      value={servingsState}
+                      onChange={e =>
+                        setServingsState(parseFloat(e.target.value))
+                      }
                       placeholder="Servings"
-                      value={recipe.servings}
                       className="input is-small"
                     />
                   </p>
                   <p className="control">
-                    <a className="button is-static is-small">Servings</a>
+                    <a className="button is-static is-small" href="#/">
+                      Servings
+                    </a>
                   </p>
                 </div>
               </div>
             </div>
             <div className="content">
               <ul>
-                {recipe.ingredients.map(i => (
-                  <li>{getIngredientDisplay(i)}</li>
+                {recipe.ingredients.map((i, idx) => (
+                  <li key={idx}>
+                    {getIngredientDisplay(i, servingsState / recipe.servings)}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -130,8 +147,8 @@ const RecipePage = ({ recipes, fetchRecipe, updateRecipe, edit }: Props) => {
             <div className="is-divider" data-content="INSTRUCTIONS" />
             <div className="content">
               <ol type="1">
-                {recipe.instructions.map(i => (
-                  <li>{i}</li>
+                {recipe.instructions.map((i, idx) => (
+                  <li key={idx}>{i}</li>
                 ))}
               </ol>
             </div>
