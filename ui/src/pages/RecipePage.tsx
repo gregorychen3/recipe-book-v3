@@ -98,18 +98,22 @@ const RecipePage = ({ recipes, fetchRecipe, updateRecipe, edit }: Props) => {
         {recipe.ingredients.length > 0 && (
           <>
             <div className="is-divider" data-content="INGREDIENTS" />
-            <div className="field has-addons">
-              <p className="control">
-                <input
-                  type="number"
-                  placeholder="Servings"
-                  value={recipe.servings}
-                  className="input"
-                />
-              </p>
-              <p className="control">
-                <a className="button is-static">Servings</a>
-              </p>
+            <div className="columns">
+              <div className="column is-one-fifth">
+                <div className="field has-addons">
+                  <p className="control">
+                    <input
+                      type="number"
+                      placeholder="Servings"
+                      value={recipe.servings}
+                      className="input is-small"
+                    />
+                  </p>
+                  <p className="control">
+                    <a className="button is-static is-small">Servings</a>
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="content">
               <ul>
