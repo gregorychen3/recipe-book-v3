@@ -27,7 +27,7 @@ function App() {
           <EditRecipePage />
         </Route>
         <Route exact path="/recipes/:recipeId">
-          <RecipePage edit={false} />
+          <RecipePage />
         </Route>
         <Route exact path="/about">
           <AboutPage />

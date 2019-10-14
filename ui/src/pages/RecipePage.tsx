@@ -30,12 +30,11 @@ const getSourceDisplay = (s: string) =>
   );
 
 interface Props {
-  edit: boolean;
   recipes: IRecipeModel[];
   fetchRecipe: typeof fetchRecipe;
   updateRecipe: typeof updateRecipe;
 }
-const RecipePage = ({ recipes, fetchRecipe, updateRecipe, edit }: Props) => {
+const RecipePage = ({ recipes, fetchRecipe, updateRecipe }: Props) => {
   let history = useHistory();
 
   let { recipeId } = useParams();
@@ -60,17 +59,7 @@ const RecipePage = ({ recipes, fetchRecipe, updateRecipe, edit }: Props) => {
   if (!recipe) {
     return null;
   }
-  if (edit) {
-    return (
-      <RecipeForm
-        recipe={recipe}
-        onSubmit={(recipeId: string, recipe: IRecipe) => {
-          updateRecipe(recipeId, recipe);
-          history.push(`/recipes/${recipeId}`);
-        }}
-      />
-    );
-  }
+
   return (
     <section className="section">
       <div className="container">
