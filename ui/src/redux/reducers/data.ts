@@ -3,7 +3,8 @@ import { compareByProp } from "../../helpers";
 import {
   ActionTypes,
   FETCH_RECIPES_SUCCESS,
-  FETCH_RECIPE_SUCCESS
+  FETCH_RECIPE_SUCCESS,
+  UPDATE_RECIPE_SUCCESS
 } from "../actions";
 
 export interface DataState {
@@ -30,6 +31,15 @@ const dataReducer = (
           action.payload
         ].sort(compareByProp("name"))
       };
+    case UPDATE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        recipes: [
+          ...state.recipes.filter(r => r._id !== action.payload._id),
+          action.payload
+        ].sort(compareByProp("name"))
+      };
+
     default:
       return state;
   }
