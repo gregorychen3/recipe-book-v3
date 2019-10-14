@@ -10,12 +10,18 @@ import {
   IIngredient
 } from "../types";
 
+interface IngredientValues {
+  qty: number | "";
+  unit: string;
+  name: string;
+}
+
 interface FormValues {
   name: string;
   course: ICourse;
   cuisine: ICuisine;
   servings: number;
-  ingredients: IIngredient[];
+  ingredients: IngredientValues[];
   instructions: string[];
   sources: string[];
 }
@@ -270,16 +276,26 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   );*/
 };
 
-const getDefaultIngredient = (): IIngredient => ({ name: "" });
+const getDefaultIngredient = (): IngredientValues => ({
+  qty: "",
+  unit: "",
+  name: ""
+});
 
-// The type of props MyForm receives
+const getIngredientValues = (
+  ingredients: IIngredient[]
+): IngredientValues[] => {
+  return ingredients.map(i => ({
+    qty: i.qty || "",
+    unit: i.unit || "",
+    name: i.name
+  }));
+};
+
 interface MyFormProps {
-  recipe: IRecipeModel; // if this passed all the way through you might do this or make a union type
+  recipe: IRecipeModel;
 }
-
-// Wrap our form with the using withFormik HoC
 export const RecipeForm = withFormik<MyFormProps, FormValues>({
-  // Transform outer props into form values
   mapPropsToValues: props => {
     const {
       name,
@@ -295,7 +311,10 @@ export const RecipeForm = withFormik<MyFormProps, FormValues>({
       course,
       cuisine,
       servings,
-      ingredients: [...ingredients, getDefaultIngredient()],
+      ingredients: [
+        ...getIngredientValues(ingredients),
+        getDefaultIngredient()
+      ],
       instructions: [...instructions, ""],
       sources: [...sources, ""]
     };
