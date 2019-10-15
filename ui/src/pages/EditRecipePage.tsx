@@ -39,6 +39,7 @@ const EditRecipePage = ({ recipes, fetchRecipe, updateRecipe }: Props) => {
         updateRecipe(recipeId, recipe);
         history.push(`/recipes/${recipeId}`);
       }}
+      onCancel={(recipeId: string) => history.push(`/recipes/${recipeId}`)}
     />
   );
 };

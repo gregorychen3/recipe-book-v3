@@ -40,6 +40,7 @@ interface FormValues {
 }
 interface OtherProps {
   recipe: IRecipeModel;
+  onCancel: (recipeId: string) => void;
 }
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -51,7 +52,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     dirty,
     setFieldValue
   } = props;
-  console.log(JSON.stringify(errors, null, 2));
   return (
     <Form>
       <section className="section">
@@ -266,7 +266,12 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
           <div className="field is-grouped is-grouped-right">
             <p className="control">
-              <a className="button is-light">Cancel</a>
+              <a
+                onClick={() => props.onCancel(props.recipe._id)}
+                className="button is-light"
+              >
+                Cancel
+              </a>
             </p>
             <p className="control">
               <button
@@ -350,6 +355,7 @@ const recipeFromValues = (values: FormValues): IRecipe => {
 interface MyFormProps {
   recipe: IRecipeModel;
   onSubmit: (recipeId: string, recipe: IRecipe) => void;
+  onCancel: (recipeId: string) => void;
 }
 export const RecipeForm = withFormik<MyFormProps, FormValues>({
   mapPropsToValues: props => {
