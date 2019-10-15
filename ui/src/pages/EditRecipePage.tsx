@@ -4,7 +4,12 @@ import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { RecipeForm } from "../components/RecipeForm";
-import { ActionTypes, fetchRecipe, updateRecipe } from "../redux/actions";
+import {
+  ActionTypes,
+  deleteRecipe,
+  fetchRecipe,
+  updateRecipe
+} from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
 import { IRecipe } from "../types";
@@ -13,8 +18,14 @@ interface Props {
   recipes: IRecipeModel[];
   fetchRecipe: typeof fetchRecipe;
   updateRecipe: typeof updateRecipe;
+  deleteRecipe: typeof deleteRecipe;
 }
-const EditRecipePage = ({ recipes, fetchRecipe, updateRecipe }: Props) => {
+const EditRecipePage = ({
+  recipes,
+  fetchRecipe,
+  updateRecipe,
+  deleteRecipe
+}: Props) => {
   let history = useHistory();
 
   let { recipeId } = useParams();
@@ -40,16 +51,14 @@ const EditRecipePage = ({ recipes, fetchRecipe, updateRecipe }: Props) => {
         history.push(`/recipes/${recipeId}`);
       }}
       onCancel={(recipeId: string) => history.push(`/recipes/${recipeId}`)}
-      onDelete={(recipeId: string) => {
-        history.push("/recipes/");
-      }}
+      onDelete={(recipeId: string) => deleteRecipe(recipeId)}
     />
   );
 };
 
 const mapStateToProps = (state: RootState) => ({ recipes: recipes(state) });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators({ fetchRecipe, updateRecipe }, dispatch);
+  bindActionCreators({ fetchRecipe, updateRecipe, deleteRecipe }, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
