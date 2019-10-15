@@ -319,22 +319,33 @@ const getIngredientValues = (
   }));
 };
 
-const recipeFromValues = (values: FormValues): IRecipe => ({
-  name: values.name,
-  course: values.course,
-  cuisine: values.cuisine,
-  servings: values.servings,
-  ingredients: values.ingredients
-    .filter(i => i.name)
-    .map(i => {
-      const ingredient: IIngredient = { name: i.name };
-      i.qty && (ingredient.qty = i.qty);
-      i.unit && (ingredient.unit = i.unit);
-      return ingredient;
-    }),
-  instructions: values.instructions.filter(i => i),
-  sources: values.sources.filter(s => s)
-});
+const recipeFromValues = (values: FormValues): IRecipe => {
+  const {
+    name,
+    course,
+    cuisine,
+    servings,
+    ingredients,
+    instructions,
+    sources
+  } = values;
+  return {
+    name: name.trim(),
+    course: course,
+    cuisine: cuisine,
+    servings: servings,
+    ingredients: ingredients
+      .filter(i => i.name)
+      .map(i => {
+        const ingredient: IIngredient = { name: i.name.trim() };
+        i.qty && (ingredient.qty = i.qty);
+        i.unit && (ingredient.unit = i.unit.trim());
+        return ingredient;
+      }),
+    instructions: instructions.filter(i => i.trim()),
+    sources: sources.filter(s => s.trim())
+  };
+};
 
 interface MyFormProps {
   recipe: IRecipeModel;
