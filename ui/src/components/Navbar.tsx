@@ -1,5 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { bindActionCreators, Dispatch } from "redux";
+import { ActionTypes, fetchRecipe, updateRecipe } from "../redux/actions";
 
 const Navbar = () => (
   <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -59,4 +62,9 @@ const Navbar = () => (
   </nav>
 );
 
-export default Navbar;
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
+  bindActionCreators({ fetchRecipe, updateRecipe }, dispatch);
+export default connect(
+  null,
+  mapDispatchToProps
+)(Navbar);
