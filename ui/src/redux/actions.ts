@@ -76,6 +76,21 @@ interface CreateRecipeFailureAction {
   type: typeof CREATE_RECIPE_FAILURE;
 }
 
+export const DELETE_RECIPE_REQUEST = "DELETE_RECIPE_REQUEST";
+interface DeleteRecipeRequestAction {
+  type: typeof DELETE_RECIPE_REQUEST;
+  payload: string;
+}
+export const DELETE_RECIPE_SUCCESS = "DELETE_RECIPE_SUCCESS";
+interface DeleteRecipeSuccessAction {
+  type: typeof DELETE_RECIPE_SUCCESS;
+  payload: string;
+}
+export const DELETE_RECIPE_FAILURE = "DELETE_RECIPE_FAILURE";
+interface DeleteRecipeFailureAction {
+  type: typeof DELETE_RECIPE_FAILURE;
+}
+
 export type ActionTypes =
   | FetchRecipesRequestAction
   | FetchRecipesSuccessAction
@@ -88,7 +103,10 @@ export type ActionTypes =
   | UpdateRecipeFailureAction
   | CreateRecipeRequestAction
   | CreateRecipeSuccessAction
-  | CreateRecipeFailureAction;
+  | CreateRecipeFailureAction
+  | DeleteRecipeRequestAction
+  | DeleteRecipeSuccessAction
+  | DeleteRecipeFailureAction;
 
 //
 // SYNC ACTION CREATORS
@@ -152,6 +170,18 @@ export const createRecipeFailure = (): ActionTypes => ({
   type: CREATE_RECIPE_FAILURE
 });
 
+export const deleteRecipeRequest = (recipeId: string): ActionTypes => ({
+  type: DELETE_RECIPE_REQUEST,
+  payload: recipeId
+});
+export const deleteRecipeSuccess = (recipeId: string): ActionTypes => ({
+  type: DELETE_RECIPE_SUCCESS,
+  payload: recipeId
+});
+export const deleteRecipeFailure = (): ActionTypes => ({
+  type: DELETE_RECIPE_FAILURE
+});
+
 //
 // THUNK ACTION CREATORS
 // ---------------------
@@ -202,6 +232,20 @@ export const createRecipe = (recipe: IRecipe) => async (
     history.push(`/recipes/${response.data._id}/edit`);
   } catch (e) {
     dispatch(createRecipeFailure());
+    console.error(e);
+  }
+};
+
+export const deleteRecipe = (recipeId: string) => async (
+  dispatch: Dispatch
+): Promise<void> => {
+  dispatch(deleteRecipeRequest(recipeId));
+  try {
+    const response = await client.deleteRecipe(recipeId);
+    dispatch(deleteRecipeSuccess(response.data._id));
+    history.push(`/recipes`);
+  } catch (e) {
+    dispatch(deleteRecipeFailure());
     console.error(e);
   }
 };
