@@ -47,7 +47,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
     values,
     errors,
-    isSubmitting,
     handleChange,
     handleBlur,
     dirty,
