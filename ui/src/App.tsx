@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch
-} from "react-router-dom";
+import { Router, Redirect, Route, Switch } from "react-router-dom";
 import "./App.scss";
 import Navbar from "./components/Navbar";
 import AboutPage from "./pages/AboutPage";
@@ -12,9 +7,13 @@ import EditRecipePage from "./pages/EditRecipePage";
 import RecipePage from "./pages/RecipePage";
 import RecipesPage from "./pages/RecipesPage";
 
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory();
+
 function App() {
   return (
-    <Router>
+    <Router history={history}>
       <Navbar />
       <Switch>
         <Route exact path="/">

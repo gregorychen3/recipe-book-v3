@@ -2,6 +2,7 @@ import { Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import client from "../apiClient";
 import { IRecipe } from "../types";
+import { history } from "../App";
 
 //
 // SYNC ACTION TYPES
@@ -198,6 +199,7 @@ export const createRecipe = (recipe: IRecipe) => async (
   try {
     const response = await client.createRecipe(recipe);
     dispatch(createRecipeSuccess(response.data));
+    history.push(`/recipes/${response.data._id}/edit`);
   } catch (e) {
     dispatch(createRecipeFailure());
     console.error(e);
