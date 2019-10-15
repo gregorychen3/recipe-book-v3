@@ -60,6 +60,21 @@ interface UpdateRecipeFailureAction {
   type: typeof UPDATE_RECIPE_FAILURE;
 }
 
+export const CREATE_RECIPE_REQUEST = "CREATE_RECIPE_REQUEST";
+interface CreateRecipeRequestAction {
+  type: typeof CREATE_RECIPE_REQUEST;
+  payload: IRecipe;
+}
+export const CREATE_RECIPE_SUCCESS = "CREATE_RECIPE_SUCCESS";
+interface CreateRecipeSuccessAction {
+  type: typeof CREATE_RECIPE_SUCCESS;
+  payload: IRecipeModel;
+}
+export const CREATE_RECIPE_FAILURE = "CREATE_RECIPE_FAILURE";
+interface CreateRecipeFailureAction {
+  type: typeof CREATE_RECIPE_FAILURE;
+}
+
 export type ActionTypes =
   | FetchRecipesRequestAction
   | FetchRecipesSuccessAction
@@ -69,7 +84,10 @@ export type ActionTypes =
   | FetchRecipeFailureAction
   | UpdateRecipeRequestAction
   | UpdateRecipeSuccessAction
-  | UpdateRecipeFailureAction;
+  | UpdateRecipeFailureAction
+  | CreateRecipeRequestAction
+  | CreateRecipeSuccessAction
+  | CreateRecipeFailureAction;
 
 //
 // SYNC ACTION CREATORS
@@ -121,6 +139,18 @@ export const updateRecipeFailure = (): ActionTypes => ({
   type: UPDATE_RECIPE_FAILURE
 });
 
+export const createRecipeRequest = (recipe: IRecipe): ActionTypes => ({
+  type: CREATE_RECIPE_REQUEST,
+  payload: recipe
+});
+export const createRecipeSuccess = (recipe: IRecipeModel): ActionTypes => ({
+  type: CREATE_RECIPE_SUCCESS,
+  payload: recipe
+});
+export const createRecipeFailure = (): ActionTypes => ({
+  type: CREATE_RECIPE_FAILURE
+});
+
 //
 // THUNK ACTION CREATORS
 // ---------------------
@@ -157,6 +187,19 @@ export const updateRecipe = (recipeId: string, recipe: IRecipe) => async (
     dispatch(updateRecipeSuccess(response.data));
   } catch (e) {
     dispatch(updateRecipeFailure());
+    console.error(e);
+  }
+};
+
+export const createRecipe = (recipe: IRecipe) => async (
+  dispatch: Dispatch
+): Promise<void> => {
+  dispatch(createRecipeRequest(recipe));
+  try {
+    const response = await client.createRecipe(recipe);
+    dispatch(createRecipeSuccess(response.data));
+  } catch (e) {
+    dispatch(createRecipeFailure());
     console.error(e);
   }
 };
