@@ -34,7 +34,7 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
       <div className="is-divider" data-content="A-Z" />
       <ul>
         {recipes.map(recipe => (
-          <li>
+          <li key={recipe._id}>
             <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
           </li>
         ))}
@@ -45,18 +45,18 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
   const renderByCourse = () => (
     <>
       {courseValues.map(course => (
-        <>
+        <div key={course}>
           <div className="is-divider" data-content={course.toUpperCase()} />
           <ul>
             {recipes
               .filter(recipe => recipe.course === course)
               .map(recipe => (
-                <li>
+                <li key={recipe._id}>
                   <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
                 </li>
               ))}
           </ul>
-        </>
+        </div>
       ))}
     </>
   );
@@ -64,18 +64,18 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
   const renderByCuisine = () => (
     <>
       {cuisineValues.map(cuisine => (
-        <>
+        <div key={cuisine}>
           <div className="is-divider" data-content={cuisine.toUpperCase()} />
           <ul>
             {recipes
               .filter(recipe => recipe.cuisine === cuisine)
               .map(recipe => (
-                <li>
+                <li key={recipe._id}>
                   <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
                 </li>
               ))}
           </ul>
-        </>
+        </div>
       ))}
     </>
   );

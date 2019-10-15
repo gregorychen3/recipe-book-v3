@@ -1,6 +1,6 @@
+import classNames from "classnames";
 import { Field, FieldArray, Form, FormikProps, withFormik } from "formik";
 import React from "react";
-import classNames from "classnames";
 import * as yup from "yup";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
