@@ -1,5 +1,6 @@
 import { Field, FieldArray, Form, FormikProps, withFormik } from "formik";
 import React from "react";
+import * as yup from "yup";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
 import {
@@ -10,6 +11,16 @@ import {
   IIngredient,
   IRecipe
 } from "../types";
+
+const recipeSchema = yup.object().shape({
+  name: yup.string().required("Required"),
+  course: yup.mixed().oneOf(ICourseValues),
+  cuisine: yup.mixed().oneOf(ICuisineValues),
+  servings: yup
+    .number()
+    .integer("Must be an integer")
+    .moreThan(0, "Must be greater than 0")
+});
 
 interface IngredientValues {
   qty: number | "";
@@ -39,6 +50,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     dirty,
     setFieldValue
   } = props;
+  console.log(JSON.stringify(errors, null, 2));
   return (
     <Form>
       <section className="section">
@@ -53,6 +65,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 className="input"
               />
             </div>
+            {errors.name && <p className="help is-danger">{errors.name}</p>}
           </div>
 
           <div className="columns">
@@ -67,6 +80,9 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     className="input"
                   />
                 </div>
+                {errors.servings && (
+                  <p className="help is-danger">{errors.servings}</p>
+                )}
               </div>
             </div>
 
@@ -337,7 +353,7 @@ export const RecipeForm = withFormik<MyFormProps, FormValues>({
       sources: [...sources, ""]
     };
   },
-
+  validationSchema: recipeSchema,
   handleSubmit: (values, formikBag) => {
     const { recipe, onSubmit } = formikBag.props;
     const updatedRecipe = recipeFromValues(values);
