@@ -41,6 +41,7 @@ interface FormValues {
 interface OtherProps {
   recipe: IRecipeModel;
   onCancel: (recipeId: string) => void;
+  onDelete: (recipeId: string) => void;
 }
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -274,6 +275,14 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               </a>
             </p>
             <p className="control">
+              <a
+                onClick={() => props.onDelete(props.recipe._id)}
+                className="button is-danger"
+              >
+                Delete
+              </a>
+            </p>
+            <p className="control">
               <button
                 type="submit"
                 disabled={!dirty}
@@ -356,6 +365,7 @@ interface MyFormProps {
   recipe: IRecipeModel;
   onSubmit: (recipeId: string, recipe: IRecipe) => void;
   onCancel: (recipeId: string) => void;
+  onDelete: (recipeId: string) => void;
 }
 export const RecipeForm = withFormik<MyFormProps, FormValues>({
   mapPropsToValues: props => {
