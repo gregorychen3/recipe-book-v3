@@ -2,9 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators, Dispatch } from "redux";
-import { ActionTypes, fetchRecipe, updateRecipe } from "../redux/actions";
+import { defaultRecipe } from "../helpers";
+import { ActionTypes, createRecipe } from "../redux/actions";
 
-const Navbar = () => (
+interface Props {
+  createRecipe: typeof createRecipe;
+}
+const Navbar = ({ createRecipe }: Props) => (
   <nav className="navbar" role="navigation" aria-label="main navigation">
     <div className="navbar-brand">
       <Link to={"/recipes"} className="navbar-item">
@@ -48,7 +52,11 @@ const Navbar = () => (
             </Link>
           </div>
         </div>
-        <a className="navbar-item" href="#/">
+        <a
+          className="navbar-item"
+          onClick={() => createRecipe(defaultRecipe())}
+          href="#/"
+        >
           Add Recipe
         </a>
       </div>
@@ -63,7 +71,7 @@ const Navbar = () => (
 );
 
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators({ fetchRecipe, updateRecipe }, dispatch);
+  bindActionCreators({ createRecipe }, dispatch);
 export default connect(
   null,
   mapDispatchToProps
