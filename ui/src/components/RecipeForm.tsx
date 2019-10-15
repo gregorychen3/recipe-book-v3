@@ -270,6 +270,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               <a
                 onClick={() => props.onCancel(props.recipe._id)}
                 className="button is-light"
+                href="#/"
               >
                 Cancel
               </a>
@@ -278,6 +279,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               <a
                 onClick={() => props.onDelete(props.recipe._id)}
                 className="button is-danger"
+                href="#/"
               >
                 Delete
               </a>
