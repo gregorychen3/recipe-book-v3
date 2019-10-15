@@ -93,7 +93,11 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               <div className="field">
                 <label className="label">Course</label>
                 <div className="control is-expanded has-icons-left">
-                  <div className="select is-fullwidth">
+                  <div
+                    className={classNames("select is-fullwidth", {
+                      "is-danger": errors.course
+                    })}
+                  >
                     <select
                       name="course"
                       value={values.course}
@@ -116,7 +120,11 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               <div className="field">
                 <label className="label">Cuisine</label>
                 <div className="control is-expanded has-icons-left">
-                  <div className="select is-fullwidth">
+                  <div
+                    className={classNames("select is-fullwidth", {
+                      "is-danger": errors.cuisine
+                    })}
+                  >
                     <select
                       name="cuisine"
                       value={values.cuisine}
