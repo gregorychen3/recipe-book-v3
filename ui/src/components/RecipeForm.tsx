@@ -1,5 +1,6 @@
 import { Field, FieldArray, Form, FormikProps, withFormik } from "formik";
 import React from "react";
+import classNames from "classnames";
 import * as yup from "yup";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
@@ -62,7 +63,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                 name="name"
                 type="text"
                 placeholder="Title"
-                className="input"
+                className={classNames("input", { "is-danger": errors.name })}
               />
             </div>
             {errors.name && <p className="help is-danger">{errors.name}</p>}
@@ -77,7 +78,9 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
                     name="servings"
                     type="number"
                     placeholder="Must be > 0"
-                    className="input"
+                    className={classNames("input", {
+                      "is-danger": errors.servings
+                    })}
                   />
                 </div>
                 {errors.servings && (
