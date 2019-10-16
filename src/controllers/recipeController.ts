@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { check, validationResult } from "express-validator";
-import { authMiddleware } from "src/middlewares/auth";
 import { Recipe } from "../db/recipe";
+import { authMiddleware } from "../middlewares/auth";
 import { ICourseValues, ICuisineValues } from "../types";
 
 const recipeValidation = [
