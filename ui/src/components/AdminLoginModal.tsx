@@ -35,6 +35,7 @@ const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
           <button
             onClick={() => {
               adminLoginCallback && adminLoginCallback();
+              onHide();
             }}
             className="button is-success"
           >

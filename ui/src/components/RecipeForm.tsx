@@ -64,7 +64,9 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     adminLoginModalVisibility,
     showAdminLoginModal,
     hideAdminLoginModal,
-    setAdminLoginCallback
+    setAdminLoginCallback,
+    onCancel,
+    onDelete
   } = props;
   return (
     <Form>
@@ -295,7 +297,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               <a
                 onClick={() => {
                   showAdminLoginModal();
-                  //props.onDelete(props.recipe._id);
+                  setAdminLoginCallback(() => onDelete(props.recipe._id));
                 }}
                 className="button is-danger"
                 href="#/"
