@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { ActionTypes, hideAdminLoginModal } from "../redux/actions";
@@ -10,9 +10,11 @@ import {
 
 interface Props {
   onHide: () => void;
-  adminLoginCallback: (() => void) | undefined;
+  adminLoginCallback: ((password: string) => void) | undefined;
 }
 const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
+  const [password, setPassword] = useState("");
+
   return (
     <div className="modal is-active">
       <div className="modal-background" onClick={() => onHide()}></div>
@@ -26,7 +28,14 @@ const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
           ></button>
         </header>
         <section className="modal-card-body">
-          <input className="input" type="password" placeholder="Password" />
+          <input
+            type="password"
+            onChange={(e: React.FormEvent<HTMLInputElement>) =>
+              setPassword(e.currentTarget.value)
+            }
+            placeholder="Password"
+            className="input"
+          />
         </section>
         <footer className="modal-card-foot">
           <button className="button" onClick={() => onHide()}>
@@ -34,7 +43,7 @@ const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
           </button>
           <button
             onClick={() => {
-              adminLoginCallback && adminLoginCallback();
+              adminLoginCallback && adminLoginCallback(password);
               onHide();
             }}
             className="button is-success"

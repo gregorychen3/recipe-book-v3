@@ -51,9 +51,12 @@ const apiClient = {
     const path = `/api/recipes/${id}`;
     return axios.post(path, recipe);
   },
-  deleteRecipe: (recipeId: string): AxiosPromise<{ _id: string }> => {
+  deleteRecipe: (
+    recipeId: string,
+    password: string
+  ): AxiosPromise<{ _id: string }> => {
     const path = `/api/recipes/${recipeId}`;
-    return axios.delete(path);
+    return axios.delete(path, { auth: { username: "admin", password } });
   }
 };
 

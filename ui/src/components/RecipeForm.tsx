@@ -47,7 +47,7 @@ interface FormValues {
 interface OtherProps {
   recipe: IRecipeModel;
   onCancel: (recipeId: string) => void;
-  onDelete: (recipeId: string) => void;
+  onDelete: (recipeId: string) => (password: string) => void;
   adminLoginModalVisibility: boolean;
   showAdminLoginModal: typeof showAdminLoginModal;
   hideAdminLoginModal: typeof hideAdminLoginModal;
@@ -297,7 +297,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               <a
                 onClick={() => {
                   showAdminLoginModal();
-                  setAdminLoginCallback(() => onDelete(props.recipe._id));
+                  setAdminLoginCallback(onDelete(props.recipe._id));
                 }}
                 className="button is-danger"
                 href="#/"
@@ -388,7 +388,7 @@ interface MyFormProps {
   recipe: IRecipeModel;
   onSubmit: (recipeId: string, recipe: IRecipe) => void;
   onCancel: (recipeId: string) => void;
-  onDelete: (recipeId: string) => void;
+  onDelete: (recipeId: string) => (password: string) => void;
   adminLoginModalVisibility: boolean;
   showAdminLoginModal: typeof showAdminLoginModal;
   hideAdminLoginModal: typeof hideAdminLoginModal;

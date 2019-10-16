@@ -12,7 +12,7 @@ import {
 
 export interface DataState {
   recipes: IRecipeModel[];
-  adminLoginCallback: (() => void) | undefined;
+  adminLoginCallback: ((password: string) => void) | undefined;
 }
 
 const initialState: DataState = { recipes: [], adminLoginCallback: undefined };

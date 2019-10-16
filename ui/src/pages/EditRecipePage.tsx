@@ -61,7 +61,8 @@ const EditRecipePage = ({
         updateRecipe(recipeId, recipe);
       }}
       onCancel={(recipeId: string) => history.push(`/recipes/${recipeId}`)}
-      onDelete={(recipeId: string) => deleteRecipe(recipeId)}
+      onDelete={(recipeId: string) => (password: string) =>
+        deleteRecipe(recipeId, password)}
       adminLoginModalVisibility={adminLoginModalVisibility}
       showAdminLoginModal={showAdminLoginModal}
       hideAdminLoginModal={hideAdminLoginModal}

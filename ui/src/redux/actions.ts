@@ -18,7 +18,7 @@ interface HideAdminLoginModalAction {
 export const SET_ADMIN_LOGIN_CALLBACK = "SET_ADMIN_LOGIN_CALLBACK";
 interface SetAdminLoginCallbackAction {
   type: typeof SET_ADMIN_LOGIN_CALLBACK;
-  payload: () => void;
+  payload: (password: string) => void;
 }
 
 //
@@ -126,7 +126,9 @@ export const showAdminLoginModal = (): ActionTypes => ({
 export const hideAdminLoginModal = (): ActionTypes => ({
   type: HIDE_ADMIN_LOGIN_MODAL
 });
-export const setAdminLoginCallback = (callback: () => void): ActionTypes => ({
+export const setAdminLoginCallback = (
+  callback: (password: string) => void
+): ActionTypes => ({
   type: SET_ADMIN_LOGIN_CALLBACK,
   payload: callback
 });
@@ -250,12 +252,12 @@ export const createRecipe = (recipe: IRecipe) => async (
   }
 };
 
-export const deleteRecipe = (recipeId: string) => async (
+export const deleteRecipe = (recipeId: string, password: string) => async (
   dispatch: Dispatch
 ): Promise<void> => {
   dispatch(deleteRecipeRequest(recipeId));
   try {
-    const response = await client.deleteRecipe(recipeId);
+    const response = await client.deleteRecipe(recipeId, password);
     dispatch(deleteRecipeSuccess(response.data._id));
     history.push(`/recipes`);
   } catch (e) {
