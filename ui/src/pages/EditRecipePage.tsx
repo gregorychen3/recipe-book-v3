@@ -57,12 +57,11 @@ const EditRecipePage = ({
   return (
     <RecipeForm
       recipe={recipe}
-      onSubmit={(recipeId: string, recipe: IRecipe) => {
-        updateRecipe(recipeId, recipe);
-      }}
-      onCancel={(recipeId: string) => history.push(`/recipes/${recipeId}`)}
+      onSubmit={(recipeId: string, recipe: IRecipe) => (password: string) =>
+        updateRecipe(recipeId, recipe, password)}
       onDelete={(recipeId: string) => (password: string) =>
         deleteRecipe(recipeId, password)}
+      onCancel={(recipeId: string) => history.push(`/recipes/${recipeId}`)}
       adminLoginModalVisibility={adminLoginModalVisibility}
       showAdminLoginModal={showAdminLoginModal}
       hideAdminLoginModal={hideAdminLoginModal}

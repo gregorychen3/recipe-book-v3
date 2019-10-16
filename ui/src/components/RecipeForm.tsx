@@ -386,7 +386,7 @@ const recipeFromValues = (values: FormValues): IRecipe => {
 
 interface MyFormProps {
   recipe: IRecipeModel;
-  onSubmit: (recipeId: string, recipe: IRecipe) => void;
+  onSubmit: (recipeId: string, recipe: IRecipe) => (password: string) => void;
   onCancel: (recipeId: string) => void;
   onDelete: (recipeId: string) => (password: string) => void;
   adminLoginModalVisibility: boolean;
@@ -428,9 +428,6 @@ export const RecipeForm = withFormik<MyFormProps, FormValues>({
     } = formikBag.props;
     const updatedRecipe = recipeFromValues(values);
     showAdminLoginModal();
-    setAdminLoginCallback(() => {
-      onSubmit(recipe._id, updatedRecipe);
-    });
-    //onSubmit(recipe._id, updatedRecipe);
+    setAdminLoginCallback(onSubmit(recipe._id, updatedRecipe));
   }
 })(InnerForm);

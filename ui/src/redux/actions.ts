@@ -224,12 +224,14 @@ export const fetchRecipe = (recipeId: string) => async (
   }
 };
 
-export const updateRecipe = (recipeId: string, recipe: IRecipe) => async (
-  dispatch: Dispatch
-): Promise<void> => {
+export const updateRecipe = (
+  recipeId: string,
+  recipe: IRecipe,
+  password: string
+) => async (dispatch: Dispatch): Promise<void> => {
   dispatch(updateRecipeRequest(recipeId, recipe));
   try {
-    const response = await client.updateRecipe(recipeId, recipe);
+    const response = await client.updateRecipe(recipeId, recipe, password);
     dispatch(updateRecipeSuccess(response.data));
     history.push(`/recipes/${recipeId}`);
   } catch (e) {
