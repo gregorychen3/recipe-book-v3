@@ -5,6 +5,11 @@ import * as yup from "yup";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { capitalize } from "../helpers";
 import {
+  hideAdminLoginModal,
+  setAdminLoginCallback,
+  showAdminLoginModal
+} from "../redux/actions";
+import {
   ICourse,
   ICourseValues,
   ICuisine,
@@ -13,7 +18,6 @@ import {
   IRecipe
 } from "../types";
 import AdminLoginModal from "./AdminLoginModal";
-import { showAdminLoginModal, hideAdminLoginModal } from "../redux/actions";
 
 const recipeSchema = yup.object().shape({
   name: yup.string().required("Required"),
@@ -47,6 +51,7 @@ interface OtherProps {
   adminLoginModalVisibility: boolean;
   showAdminLoginModal: typeof showAdminLoginModal;
   hideAdminLoginModal: typeof hideAdminLoginModal;
+  setAdminLoginCallback: typeof setAdminLoginCallback;
 }
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -58,7 +63,8 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     setFieldValue,
     adminLoginModalVisibility,
     showAdminLoginModal,
-    hideAdminLoginModal
+    hideAdminLoginModal,
+    setAdminLoginCallback
   } = props;
   return (
     <Form>
@@ -384,6 +390,7 @@ interface MyFormProps {
   adminLoginModalVisibility: boolean;
   showAdminLoginModal: typeof showAdminLoginModal;
   hideAdminLoginModal: typeof hideAdminLoginModal;
+  setAdminLoginCallback: typeof setAdminLoginCallback;
 }
 export const RecipeForm = withFormik<MyFormProps, FormValues>({
   mapPropsToValues: props => {

@@ -66,6 +66,7 @@ const EditRecipePage = ({
       adminLoginModalVisibility={adminLoginModalVisibility}
       showAdminLoginModal={showAdminLoginModal}
       hideAdminLoginModal={hideAdminLoginModal}
+      setAdminLoginCallback={setAdminLoginCallback}
     />
   );
 };
