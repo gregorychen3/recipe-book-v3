@@ -1,5 +1,7 @@
 import express, { Request, Response } from "express";
+import basicAuth from "express-basic-auth";
 import { check, validationResult } from "express-validator";
+import { ADMIN_PASSWORD } from "../config";
 import { Recipe } from "../db/recipe";
 import { ICourseValues, ICuisineValues } from "../types";
 
@@ -140,14 +142,18 @@ recipeController.post(
   }
 );
 
-recipeController.delete("/:id", async (req, res) => {
-  const recipe = await Recipe.findOne({ _id: req.params.id });
-  if (!recipe) {
-    return res.sendStatus(404);
-  }
+recipeController.delete(
+  "/:id",
+  basicAuth({ users: { admin: ADMIN_PASSWORD } }),
+  async (req, res) => {
+    const recipe = await Recipe.findOne({ _id: req.params.id });
+    if (!recipe) {
+      return res.sendStatus(404);
+    }
 
-  const deleted = await recipe.remove();
-  return res.send({ _id: deleted._id });
-});
+    const deleted = await recipe.remove();
+    return res.send({ _id: deleted._id });
+  }
+);
 
 export default recipeController;
