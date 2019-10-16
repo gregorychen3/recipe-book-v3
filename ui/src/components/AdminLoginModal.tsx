@@ -1,11 +1,26 @@
-import React from "React";
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
+import { ActionTypes, hideAdminLoginModal } from "../redux/actions";
+import { RootState } from "../redux/reducers";
+import { adminLoginModalVisibility } from "../redux/selectors";
 
 const AdminLoginModal = () => {
-  <div className="modal">
-    <div className="modal-background"></div>
-    <div className="modal-content">Admin login </div>
-    <button className="modal-close is-large" aria-label="close"></button>
-  </div>;
+  return (
+    <div className="modal is-active">
+      <div className="modal-background"></div>
+      <div className="modal-content">Admin login </div>
+      <button className="modal-close is-large" aria-label="close"></button>
+    </div>
+  );
 };
 
-export default AdminLoginModal;
+const mapStateToProps = (state: RootState) => ({
+  adminLoginModalVisibility: adminLoginModalVisibility(state)
+});
+const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
+  bindActionCreators({ hideAdminLoginModal }, dispatch);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminLoginModal);
