@@ -5,12 +5,19 @@ import { ActionTypes, hideAdminLoginModal } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { adminLoginModalVisibility } from "../redux/selectors";
 
-const AdminLoginModal = () => {
+interface Props {
+  onHide: () => void;
+}
+const AdminLoginModal = ({ onHide }: Props) => {
   return (
     <div className="modal is-active">
       <div className="modal-background"></div>
       <div className="modal-content">Admin login </div>
-      <button className="modal-close is-large" aria-label="close"></button>
+      <button
+        className="modal-close is-large"
+        aria-label="close"
+        onClick={() => onHide()}
+      ></button>
     </div>
   );
 };

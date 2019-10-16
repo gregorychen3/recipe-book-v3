@@ -11,6 +11,7 @@ import {
   ActionTypes,
   fetchRecipe,
   showAdminLoginModal,
+  hideAdminLoginModal,
   updateRecipe
 } from "../redux/actions";
 import { RootState } from "../redux/reducers";
@@ -39,13 +40,15 @@ interface Props {
   fetchRecipe: typeof fetchRecipe;
   updateRecipe: typeof updateRecipe;
   showAdminLoginModal: typeof showAdminLoginModal;
+  hideAdminLoginModal: typeof hideAdminLoginModal;
 }
 const RecipePage = ({
   recipes,
   fetchRecipe,
   updateRecipe,
   adminLoginModalVisibility,
-  showAdminLoginModal
+  showAdminLoginModal,
+  hideAdminLoginModal
 }: Props) => {
   let history = useHistory();
 
@@ -74,7 +77,9 @@ const RecipePage = ({
 
   return (
     <section className="section">
-      {adminLoginModalVisibility && <AdminLoginModal />}
+      {adminLoginModalVisibility && (
+        <AdminLoginModal onHide={hideAdminLoginModal} />
+      )}
       <div className="container">
         <h1 className="title has-text-centered">
           <a className="button is-white is-pulled-left is-invisible" href="#/">
@@ -183,7 +188,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators(
-    { fetchRecipe, updateRecipe, showAdminLoginModal },
+    { fetchRecipe, updateRecipe, showAdminLoginModal, hideAdminLoginModal },
     dispatch
   );
 export default connect(
