@@ -15,6 +15,11 @@ export const HIDE_ADMIN_LOGIN_MODAL = "HIDE_ADMIN_LOGIN_MODAL";
 interface HideAdminLoginModalAction {
   type: typeof HIDE_ADMIN_LOGIN_MODAL;
 }
+export const SET_ADMIN_LOGIN_CALLBACK = "SET_ADMIN_LOGIN_CALLBACK";
+interface SetAdminLoginCallbackAction {
+  type: typeof SET_ADMIN_LOGIN_CALLBACK;
+  payload: () => void;
+}
 
 //
 // ASYNC ACTION TYPES
@@ -109,7 +114,8 @@ export type ActionTypes =
   | DeleteRecipeSuccessAction
   | DeleteRecipeFailureAction
   | ShowAdminLoginModalAction
-  | HideAdminLoginModalAction;
+  | HideAdminLoginModalAction
+  | SetAdminLoginCallbackAction;
 
 //
 // SYNC ACTION CREATORS
@@ -119,6 +125,10 @@ export const showAdminLoginModal = (): ActionTypes => ({
 });
 export const hideAdminLoginModal = (): ActionTypes => ({
   type: HIDE_ADMIN_LOGIN_MODAL
+});
+export const setAdminLoginCallback = (callback: () => void): ActionTypes => ({
+  type: SET_ADMIN_LOGIN_CALLBACK,
+  payload: callback
 });
 
 //

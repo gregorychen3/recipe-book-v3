@@ -6,14 +6,16 @@ import {
   DELETE_RECIPE_SUCCESS,
   FETCH_RECIPES_SUCCESS,
   FETCH_RECIPE_SUCCESS,
-  UPDATE_RECIPE_SUCCESS
+  UPDATE_RECIPE_SUCCESS,
+  SET_ADMIN_LOGIN_CALLBACK
 } from "../actions";
 
 export interface DataState {
   recipes: IRecipeModel[];
+  adminLoginCallback: (() => void) | undefined;
 }
 
-const initialState: DataState = { recipes: [] };
+const initialState: DataState = { recipes: [], adminLoginCallback: undefined };
 
 const dataReducer = (
   state: DataState = initialState,
@@ -53,6 +55,11 @@ const dataReducer = (
       return {
         ...state,
         recipes: state.recipes.filter(r => r._id !== action.payload)
+      };
+    case SET_ADMIN_LOGIN_CALLBACK:
+      return {
+        ...state,
+        adminLoginCallback: action.payload
       };
     default:
       return state;
