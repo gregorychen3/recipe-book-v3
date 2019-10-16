@@ -5,17 +5,10 @@ import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { IIngredient } from "../../../src/types";
-import AdminLoginModal from "../components/AdminLoginModal";
 import { capitalize } from "../helpers";
-import {
-  ActionTypes,
-  fetchRecipe,
-  showAdminLoginModal,
-  hideAdminLoginModal,
-  updateRecipe
-} from "../redux/actions";
+import { ActionTypes, fetchRecipe, updateRecipe } from "../redux/actions";
 import { RootState } from "../redux/reducers";
-import { adminLoginModalVisibility, recipes } from "../redux/selectors";
+import { recipes } from "../redux/selectors";
 
 const getIngredientDisplay = (i: IIngredient, scalingFactor: number) => {
   let display = "";
@@ -36,20 +29,9 @@ const getSourceDisplay = (s: string) =>
 
 interface Props {
   recipes: IRecipeModel[];
-  adminLoginModalVisibility: boolean;
   fetchRecipe: typeof fetchRecipe;
-  updateRecipe: typeof updateRecipe;
-  showAdminLoginModal: typeof showAdminLoginModal;
-  hideAdminLoginModal: typeof hideAdminLoginModal;
 }
-const RecipePage = ({
-  recipes,
-  fetchRecipe,
-  updateRecipe,
-  adminLoginModalVisibility,
-  showAdminLoginModal,
-  hideAdminLoginModal
-}: Props) => {
+const RecipePage = ({ recipes, fetchRecipe }: Props) => {
   let history = useHistory();
 
   let { recipeId } = useParams();
@@ -77,9 +59,6 @@ const RecipePage = ({
 
   return (
     <section className="section">
-      {adminLoginModalVisibility && (
-        <AdminLoginModal onHide={hideAdminLoginModal} />
-      )}
       <div className="container">
         <h1 className="title has-text-centered">
           <a className="button is-white is-pulled-left is-invisible" href="#/">
@@ -90,8 +69,7 @@ const RecipePage = ({
           {recipe.name}
           <a
             onClick={() => {
-              showAdminLoginModal();
-              //history.push(`/recipes/${recipeId}/edit`);
+              history.push(`/recipes/${recipeId}/edit`);
             }}
             className="button is-white is-pulled-right"
             href="#/"
@@ -183,14 +161,10 @@ const RecipePage = ({
 };
 
 const mapStateToProps = (state: RootState) => ({
-  recipes: recipes(state),
-  adminLoginModalVisibility: adminLoginModalVisibility(state)
+  recipes: recipes(state)
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators(
-    { fetchRecipe, updateRecipe, showAdminLoginModal, hideAdminLoginModal },
-    dispatch
-  );
+  bindActionCreators({ fetchRecipe }, dispatch);
 export default connect(
   mapStateToProps,
   mapDispatchToProps
