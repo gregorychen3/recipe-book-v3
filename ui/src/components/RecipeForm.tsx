@@ -420,9 +420,17 @@ export const RecipeForm = withFormik<MyFormProps, FormValues>({
   },
   validationSchema: recipeSchema,
   handleSubmit: (values, formikBag) => {
-    const { recipe, onSubmit, showAdminLoginModal } = formikBag.props;
+    const {
+      recipe,
+      onSubmit,
+      showAdminLoginModal,
+      setAdminLoginCallback
+    } = formikBag.props;
     const updatedRecipe = recipeFromValues(values);
     showAdminLoginModal();
+    setAdminLoginCallback(() => {
+      onSubmit(recipe._id, updatedRecipe);
+    });
     //onSubmit(recipe._id, updatedRecipe);
   }
 })(InnerForm);

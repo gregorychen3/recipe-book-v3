@@ -59,7 +59,6 @@ const EditRecipePage = ({
       recipe={recipe}
       onSubmit={(recipeId: string, recipe: IRecipe) => {
         updateRecipe(recipeId, recipe);
-        history.push(`/recipes/${recipeId}`);
       }}
       onCancel={(recipeId: string) => history.push(`/recipes/${recipeId}`)}
       onDelete={(recipeId: string) => deleteRecipe(recipeId)}

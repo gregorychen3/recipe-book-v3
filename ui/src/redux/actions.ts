@@ -229,6 +229,7 @@ export const updateRecipe = (recipeId: string, recipe: IRecipe) => async (
   try {
     const response = await client.updateRecipe(recipeId, recipe);
     dispatch(updateRecipeSuccess(response.data));
+    history.push(`/recipes/${recipeId}`);
   } catch (e) {
     dispatch(updateRecipeFailure());
     console.error(e);
