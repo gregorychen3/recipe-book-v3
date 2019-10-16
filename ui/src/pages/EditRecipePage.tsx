@@ -9,6 +9,7 @@ import {
   deleteRecipe,
   fetchRecipe,
   hideAdminLoginModal,
+  setAdminLoginCallback,
   showAdminLoginModal,
   updateRecipe
 } from "../redux/actions";
@@ -24,6 +25,7 @@ interface Props {
   adminLoginModalVisibility: boolean;
   showAdminLoginModal: typeof showAdminLoginModal;
   hideAdminLoginModal: typeof hideAdminLoginModal;
+  setAdminLoginCallback: typeof setAdminLoginCallback;
 }
 const EditRecipePage = ({
   recipes,
@@ -32,7 +34,8 @@ const EditRecipePage = ({
   deleteRecipe,
   adminLoginModalVisibility,
   showAdminLoginModal,
-  hideAdminLoginModal
+  hideAdminLoginModal,
+  setAdminLoginCallback
 }: Props) => {
   let history = useHistory();
 
@@ -78,7 +81,8 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
       updateRecipe,
       deleteRecipe,
       showAdminLoginModal,
-      hideAdminLoginModal
+      hideAdminLoginModal,
+      setAdminLoginCallback
     },
     dispatch
   );
