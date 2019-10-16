@@ -104,6 +104,7 @@ recipeController.post(
 
 recipeController.post(
   "/:id",
+  basicAuth({ users: { admin: ADMIN_PASSWORD } }),
   recipeValidation,
   async (req: Request, res: Response) => {
     const recipe = await Recipe.findOne({ _id: req.params.id });
