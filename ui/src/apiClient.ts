@@ -47,9 +47,13 @@ const apiClient = {
     const path = `/api/recipes`;
     return axios.post(path, recipe);
   },
-  updateRecipe: (id: string, recipe: IRecipe): AxiosPromise<IRecipeModel> => {
+  updateRecipe: (
+    id: string,
+    recipe: IRecipe,
+    password: string
+  ): AxiosPromise<IRecipeModel> => {
     const path = `/api/recipes/${id}`;
-    return axios.post(path, recipe);
+    return axios.post(path, recipe, { auth: { username: "admin", password } });
   },
   deleteRecipe: (
     recipeId: string,
