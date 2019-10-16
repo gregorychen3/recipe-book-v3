@@ -12,6 +12,8 @@ import {
   IIngredient,
   IRecipe
 } from "../types";
+import AdminLoginModal from "./AdminLoginModal";
+import { showAdminLoginModal, hideAdminLoginModal } from "../redux/actions";
 
 const recipeSchema = yup.object().shape({
   name: yup.string().required("Required"),
@@ -42,6 +44,9 @@ interface OtherProps {
   recipe: IRecipeModel;
   onCancel: (recipeId: string) => void;
   onDelete: (recipeId: string) => void;
+  adminLoginModalVisibility: boolean;
+  showAdminLoginModal: typeof showAdminLoginModal;
+  hideAdminLoginModal: typeof hideAdminLoginModal;
 }
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -50,10 +55,16 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     handleChange,
     handleBlur,
     dirty,
-    setFieldValue
+    setFieldValue,
+    adminLoginModalVisibility,
+    showAdminLoginModal,
+    hideAdminLoginModal
   } = props;
   return (
     <Form>
+      {adminLoginModalVisibility && (
+        <AdminLoginModal onHide={hideAdminLoginModal} />
+      )}
       <section className="section">
         <div className="container">
           <div className="field">
@@ -276,7 +287,10 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             </p>
             <p className="control">
               <a
-                onClick={() => props.onDelete(props.recipe._id)}
+                onClick={() => {
+                  showAdminLoginModal();
+                  //props.onDelete(props.recipe._id);
+                }}
                 className="button is-danger"
                 href="#/"
               >
@@ -367,6 +381,9 @@ interface MyFormProps {
   onSubmit: (recipeId: string, recipe: IRecipe) => void;
   onCancel: (recipeId: string) => void;
   onDelete: (recipeId: string) => void;
+  adminLoginModalVisibility: boolean;
+  showAdminLoginModal: typeof showAdminLoginModal;
+  hideAdminLoginModal: typeof hideAdminLoginModal;
 }
 export const RecipeForm = withFormik<MyFormProps, FormValues>({
   mapPropsToValues: props => {
@@ -394,8 +411,9 @@ export const RecipeForm = withFormik<MyFormProps, FormValues>({
   },
   validationSchema: recipeSchema,
   handleSubmit: (values, formikBag) => {
-    const { recipe, onSubmit } = formikBag.props;
+    const { recipe, onSubmit, showAdminLoginModal } = formikBag.props;
     const updatedRecipe = recipeFromValues(values);
-    onSubmit(recipe._id, updatedRecipe);
+    showAdminLoginModal();
+    //onSubmit(recipe._id, updatedRecipe);
   }
 })(InnerForm);

@@ -8,10 +8,12 @@ import {
   ActionTypes,
   deleteRecipe,
   fetchRecipe,
+  hideAdminLoginModal,
+  showAdminLoginModal,
   updateRecipe
 } from "../redux/actions";
 import { RootState } from "../redux/reducers";
-import { recipes } from "../redux/selectors";
+import { adminLoginModalVisibility, recipes } from "../redux/selectors";
 import { IRecipe } from "../types";
 
 interface Props {
@@ -19,12 +21,18 @@ interface Props {
   fetchRecipe: typeof fetchRecipe;
   updateRecipe: typeof updateRecipe;
   deleteRecipe: typeof deleteRecipe;
+  adminLoginModalVisibility: boolean;
+  showAdminLoginModal: typeof showAdminLoginModal;
+  hideAdminLoginModal: typeof hideAdminLoginModal;
 }
 const EditRecipePage = ({
   recipes,
   fetchRecipe,
   updateRecipe,
-  deleteRecipe
+  deleteRecipe,
+  adminLoginModalVisibility,
+  showAdminLoginModal,
+  hideAdminLoginModal
 }: Props) => {
   let history = useHistory();
 
@@ -52,13 +60,28 @@ const EditRecipePage = ({
       }}
       onCancel={(recipeId: string) => history.push(`/recipes/${recipeId}`)}
       onDelete={(recipeId: string) => deleteRecipe(recipeId)}
+      adminLoginModalVisibility={adminLoginModalVisibility}
+      showAdminLoginModal={showAdminLoginModal}
+      hideAdminLoginModal={hideAdminLoginModal}
     />
   );
 };
 
-const mapStateToProps = (state: RootState) => ({ recipes: recipes(state) });
+const mapStateToProps = (state: RootState) => ({
+  recipes: recipes(state),
+  adminLoginModalVisibility: adminLoginModalVisibility(state)
+});
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators({ fetchRecipe, updateRecipe, deleteRecipe }, dispatch);
+  bindActionCreators(
+    {
+      fetchRecipe,
+      updateRecipe,
+      deleteRecipe,
+      showAdminLoginModal,
+      hideAdminLoginModal
+    },
+    dispatch
+  );
 export default connect(
   mapStateToProps,
   mapDispatchToProps
