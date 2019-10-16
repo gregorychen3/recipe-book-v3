@@ -7,13 +7,14 @@ import { history } from "../App";
 //
 // SYNC ACTION TYPES
 // -----------------
-/*
-export const LOG_USER_IN = "LOG_USER_IN";
-interface LogUserInAction {
-  type: typeof LOG_USER_IN;
-  payload: firebase.User;
+export const SHOW_ADMIN_LOGIN_MODAL = "SHOW_ADMIN_LOGIN_MODAL";
+interface ShowAdminLoginModalAction {
+  type: typeof SHOW_ADMIN_LOGIN_MODAL;
 }
-*/
+export const HIDE_ADMIN_LOGIN_MODAL = "HIDE_ADMIN_LOGIN_MODAL";
+interface HideAdminLoginModalAction {
+  type: typeof HIDE_ADMIN_LOGIN_MODAL;
+}
 
 //
 // ASYNC ACTION TYPES
@@ -106,17 +107,19 @@ export type ActionTypes =
   | CreateRecipeFailureAction
   | DeleteRecipeRequestAction
   | DeleteRecipeSuccessAction
-  | DeleteRecipeFailureAction;
+  | DeleteRecipeFailureAction
+  | ShowAdminLoginModalAction
+  | HideAdminLoginModalAction;
 
 //
 // SYNC ACTION CREATORS
 // --------------------
-/*
-export const logUserIn = (user: firebase.User): ActionTypes => ({
-  type: LOG_USER_IN,
-  payload: user
+export const showAdminLoginModal = (): ActionTypes => ({
+  type: SHOW_ADMIN_LOGIN_MODAL
 });
-*/
+export const hideAdminLoginModal = (): ActionTypes => ({
+  type: HIDE_ADMIN_LOGIN_MODAL
+});
 
 //
 // ASYNC ACTION CREATORS
