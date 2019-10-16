@@ -3,12 +3,16 @@ import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { ActionTypes, hideAdminLoginModal } from "../redux/actions";
 import { RootState } from "../redux/reducers";
-import { adminLoginModalVisibility } from "../redux/selectors";
+import {
+  adminLoginModalVisibility,
+  adminLoginCallback
+} from "../redux/selectors";
 
 interface Props {
   onHide: () => void;
+  adminLoginCallback: (() => void) | undefined;
 }
-const AdminLoginModal = ({ onHide }: Props) => {
+const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
   return (
     <div className="modal is-active">
       <div className="modal-background" onClick={() => onHide()}></div>
@@ -28,7 +32,14 @@ const AdminLoginModal = ({ onHide }: Props) => {
           <button className="button" onClick={() => onHide()}>
             Cancel
           </button>
-          <button className="button is-success">Submit</button>
+          <button
+            onClick={() => {
+              adminLoginCallback && adminLoginCallback();
+            }}
+            className="button is-success"
+          >
+            Submit
+          </button>
         </footer>
       </div>
     </div>
@@ -36,7 +47,8 @@ const AdminLoginModal = ({ onHide }: Props) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  adminLoginModalVisibility: adminLoginModalVisibility(state)
+  adminLoginModalVisibility: adminLoginModalVisibility(state),
+  adminLoginCallback: adminLoginCallback(state)
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators({ hideAdminLoginModal }, dispatch);
