@@ -38,6 +38,6 @@ const migrated = oldRecipes.map(r => ({
   sources: r.sources.map(s=>s.description)
 }));
 
-Promise.all(migrated.map(r=> axios.post("http://localhost:3001/recipes", r)))
+Promise.all(migrated.map(r=> axios.post("http://localhost:3001/api/recipes", r)))
   .then(()=>console.log("all succeeded"))
   .catch(reason=>console.log(JSON.stringify(reason.response.data,null,2)));
