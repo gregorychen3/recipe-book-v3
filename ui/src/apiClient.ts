@@ -36,23 +36,23 @@ axios.interceptors.response.use(async resp => {
 
 const apiClient = {
   fetchRecipes: (): AxiosPromise<IRecipeModel[]> => {
-    const path = `/recipes`;
+    const path = `/api/recipes`;
     return axios.get(path);
   },
   fetchRecipe: (recipeId: string): AxiosPromise<IRecipeModel> => {
-    const path = `/recipes/${recipeId}`;
+    const path = `/api/recipes/${recipeId}`;
     return axios.get(path);
   },
   createRecipe: (recipe: IRecipe): AxiosPromise<IRecipeModel> => {
-    const path = `/recipes`;
+    const path = `/api/recipes`;
     return axios.post(path, recipe);
   },
   updateRecipe: (id: string, recipe: IRecipe): AxiosPromise<IRecipeModel> => {
-    const path = `/recipes/${id}`;
+    const path = `/api/recipes/${id}`;
     return axios.post(path, recipe);
   },
   deleteRecipe: (recipeId: string): AxiosPromise<{ _id: string }> => {
-    const path = `/recipes/${recipeId}`;
+    const path = `/api/recipes/${recipeId}`;
     return axios.delete(path);
   }
 };
