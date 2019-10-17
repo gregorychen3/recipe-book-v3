@@ -7,7 +7,7 @@ const AboutPage = () => (
     <div className="container">
       <img src={imagePath} alt="gregandally" />
       <h1 className="title is-spaced">Greg and Ally's Recipe Book</h1>
-      <h2 className="subtitle">Project Goals</h2>
+      <div className="subtitle">Project Goals</div>
       <div className="content">
         <ul>
           <li>assist in everyday cooking</li>
@@ -17,10 +17,9 @@ const AboutPage = () => (
       </div>
       <a href="https://github.com/gregorychen3/recipe-book">
         <span className="subtitle">Tech Stack</span>
-        <span className="icon">
+        <span className="icon" style={{ marginLeft: "5px" }}>
           <i className="fab fa-github" />
         </span>
-        GitHub
       </a>
       <div className="content">
         <ul>
@@ -54,7 +53,7 @@ const AboutPage = () => (
           </li>
         </ul>
       </div>
-      <h2 className="subtitle">Contact</h2>
+      <div className="subtitle">Contact</div>
       Kindly direct all inquiries to
       <a href="mailto:cenaacasaperdue@gmail.com"> cenaacasaperdue@gmail.com</a>,
       thank you.
