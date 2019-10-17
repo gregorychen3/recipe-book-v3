@@ -35,7 +35,7 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
       <ul>
         {recipes.map(recipe => (
           <li key={recipe._id}>
-            <Link to={`/recipes/${recipe._id}`} className="has-text-info">
+            <Link to={`/recipes/${recipe._id}`} className="has-text-grey-dark">
               {recipe.name}
             </Link>
           </li>
@@ -54,7 +54,10 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
               .filter(recipe => recipe.course === course)
               .map(recipe => (
                 <li key={recipe._id}>
-                  <Link to={`/recipes/${recipe._id}`} className="has-text-info">
+                  <Link
+                    to={`/recipes/${recipe._id}`}
+                    className="has-text-grey-dark"
+                  >
                     {recipe.name}
                   </Link>
                 </li>
@@ -75,7 +78,10 @@ const RecipeList = ({ recipes, groupBy }: Props) => {
               .filter(recipe => recipe.cuisine === cuisine)
               .map(recipe => (
                 <li key={recipe._id}>
-                  <Link to={`/recipes/${recipe._id}`} className="has-text-info">
+                  <Link
+                    to={`/recipes/${recipe._id}`}
+                    className="has-text-grey-dark"
+                  >
                     {recipe.name}
                   </Link>
                 </li>
