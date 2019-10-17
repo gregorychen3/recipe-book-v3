@@ -56,7 +56,7 @@ const AboutPage = () => (
       </div>
       <h2 className="subtitle">Contact</h2>
       Kindly direct all inquiries to
-      <a href="mailto:cenaacasaperdue@gmail.com">cenaacasaperdue@gmail.com</a>,
+      <a href="mailto:cenaacasaperdue@gmail.com"> cenaacasaperdue@gmail.com</a>,
       thank you.
     </div>
   </section>
