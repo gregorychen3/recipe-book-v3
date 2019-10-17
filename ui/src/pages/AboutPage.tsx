@@ -45,9 +45,10 @@ const AboutPage = () => (
           <li>
             v3
             <ul>
-              <li>React Hooks + Redux UI + Typescript</li>
-              <li>Express.js REST API + Typescript</li>
+              <li>React Hooks + Redux UI</li>
+              <li>Express.js REST API</li>
               <li>MongoDB</li>
+              <li>TypeScript</li>
               <li>Deployed to Heroku</li>
             </ul>
           </li>
