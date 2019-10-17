@@ -102,7 +102,7 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
                   <p className="control">
                     <input
                       type="number"
-                      value={servingsState}
+                      value={isNaN(servingsState) ? "" : servingsState}
                       onChange={e =>
                         setServingsState(parseFloat(e.target.value))
                       }
@@ -122,7 +122,10 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
               <ul>
                 {recipe.ingredients.map((i, idx) => (
                   <li key={idx}>
-                    {getIngredientDisplay(i, servingsState / recipe.servings)}
+                    {getIngredientDisplay(
+                      i,
+                      isNaN(servingsState) ? 1 : servingsState / recipe.servings
+                    )}
                   </li>
                 ))}
               </ul>
