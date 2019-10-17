@@ -12,7 +12,7 @@ import { recipes } from "../redux/selectors";
 
 const getIngredientDisplay = (i: IIngredient, scalingFactor: number) => {
   let display = "";
-  i.qty && (display += `${i.qty * scalingFactor} `);
+  i.qty && (display += `${(i.qty * scalingFactor).toFixed(2)} `);
   i.unit && (display += `${i.unit} `);
   display += i.name;
   return display;
