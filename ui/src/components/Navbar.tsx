@@ -48,14 +48,23 @@ const Navbar = ({ createRecipe }: Props) => {
               Browse
             </a>
             <div className="navbar-dropdown">
-              <Link to={"/recipes?groupBy=course"} className="navbar-item">
+              <Link
+                to={"/recipes?groupBy=course"}
+                onClick={() => setShowBurgerMenu(false)}
+                className="navbar-item"
+              >
                 By Course
               </Link>
-              <Link to={"/recipes?groupBy=cuisine"} className="navbar-item">
+              <Link
+                to={"/recipes?groupBy=cuisine"}
+                onClick={() => setShowBurgerMenu(false)}
+                className="navbar-item"
+              >
                 By Cuisine
               </Link>
               <Link
                 to={"/recipes?groupBy=alphabetical"}
+                onClick={() => setShowBurgerMenu(false)}
                 className="navbar-item"
               >
                 A-Z
@@ -64,7 +73,10 @@ const Navbar = ({ createRecipe }: Props) => {
           </div>
           <a
             className="navbar-item"
-            onClick={() => createRecipe(defaultRecipe())}
+            onClick={() => {
+              createRecipe(defaultRecipe());
+              setShowBurgerMenu(false);
+            }}
             href="#/"
           >
             Add Recipe
@@ -72,7 +84,11 @@ const Navbar = ({ createRecipe }: Props) => {
         </div>
 
         <div className="navbar-end">
-          <Link to={"/about"} className="navbar-item">
+          <Link
+            to={"/about"}
+            onClick={() => setShowBurgerMenu(false)}
+            className="navbar-item"
+          >
             About
           </Link>
         </div>
