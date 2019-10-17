@@ -1,1 +1,9 @@
 @import "node_modules/bulmaswatch/lux/bulmaswatch";
+
+.container {
+  max-width: 768px;
+}
+
+body {
+  zoom: 1.2;
+}

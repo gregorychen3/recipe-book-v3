@@ -3,24 +3,10 @@
 //@import 'node_modules/bulmaswatch/darkly/_variables.scss';
 //@import 'node_modules/bulmaswatch/darkly/_overrides.scss';
 
-.container {
-  max-width: 768px;
-}
-
 img {
   border-radius: .3125em;
 }
 
-.column {
-  padding-top: 0.75rem;
-  padding-right: 0.75rem;
-  padding-bottom: 0;
-  padding-left: 0.75rem;
-}
-
-.columns:last-child .column {
-  padding: 0.75rem;
-}
 /*
 .App {
   text-align: center;
