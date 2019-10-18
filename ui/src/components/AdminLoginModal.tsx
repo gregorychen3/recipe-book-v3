@@ -20,7 +20,7 @@ const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
       <div className="modal-background" onClick={() => onHide()}></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Administrator Login</p>
+          <p className="modal-card-title">Admin Login</p>
           <button
             className="delete"
             aria-label="close"
