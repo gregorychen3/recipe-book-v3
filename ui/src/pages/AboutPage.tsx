@@ -26,7 +26,7 @@ const AboutPage = () => (
           <li>
             v1
             <ul>
-              <li>Jinja templates</li>
+              <li>Jinja Template HTML + CSS</li>
               <li>jQuery</li>
               <li>Python Flask API</li>
               <li>PostgreSQL</li>
@@ -36,7 +36,7 @@ const AboutPage = () => (
           <li>
             v2
             <ul>
-              <li>React UI</li>
+              <li>React + Semantic UI</li>
               <li>Express.js REST API</li>
               <li>PostgreSQL</li>
               <li>Deployed to EC2 via Docker</li>
@@ -45,7 +45,7 @@ const AboutPage = () => (
           <li>
             v3
             <ul>
-              <li>React Hooks + Redux UI</li>
+              <li>React Hooks + Redux + Bulma UI</li>
               <li>Express.js REST API</li>
               <li>MongoDB</li>
               <li>TypeScript</li>
