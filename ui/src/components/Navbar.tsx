@@ -16,7 +16,7 @@ const Navbar = ({ createRecipe }: Props) => {
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         <Link to={"/recipes"} className="navbar-item">
-          <span className="icon">
+          <span className="icon is-large">
             <i className="fas fa-utensils" />
           </span>
           <span>
