@@ -37,16 +37,17 @@ const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
             className="input"
           />
         </section>
-        <footer className="modal-card-foot">
+        <footer className="modal-card-foot field is-grouped is-grouped-right">
           <button className="button" onClick={() => onHide()}>
             Cancel
           </button>
+
           <button
             onClick={() => {
               adminLoginCallback && adminLoginCallback(password);
               onHide();
             }}
-            className="button is-success"
+            className="button is-primary"
           >
             Submit
           </button>

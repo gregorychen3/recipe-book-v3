@@ -287,7 +287,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             <p className="control">
               <a
                 onClick={() => props.onCancel(props.recipe._id)}
-                className="button is-light"
+                className="button"
                 href="#/"
               >
                 Cancel
