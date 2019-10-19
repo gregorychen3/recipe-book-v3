@@ -74,8 +74,8 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
             className="button is-white is-pulled-right"
             href="#/"
           >
-            <span className="icon has-text-info is-small">
-              <i className="fas fa-edit" />
+            <span className="icon has-text-info is-small has-text-grey">
+              <i className="fas fa-edit " />
             </span>
           </a>
         </h1>
