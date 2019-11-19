@@ -3,10 +3,8 @@ import React, { useEffect } from "react";
 import { connect, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
-import { IRecipeModel } from "../../../src/db/recipe";
 import RecipeList from "../components/RecipeList";
 import { ActionTypes, fetchRecipes } from "../redux/actions";
-import { RootState } from "../redux/reducers";
 import { getRecipes } from "../redux/selectors";
 import { IGroupBy, IGroupByValues } from "../types";
 
