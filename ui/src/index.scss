@@ -1,4 +1,8 @@
-@import "node_modules/bulmaswatch/lux/bulmaswatch";
+@import 'node_modules/bulmaswatch/lux/_variables.scss';
+@import 'bulma/bulma.sass';
+@import 'node_modules/bulmaswatch/lux/_overrides.scss';
+
+@import '~bulma-extensions';
 
 .container {
   max-width: 768px;
@@ -6,4 +10,8 @@
 
 body {
   zoom: 1.2;
+}
+
+img {
+  border-radius: .3125em;
 }
