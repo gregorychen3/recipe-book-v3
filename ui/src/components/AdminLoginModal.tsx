@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { ActionTypes, hideAdminLoginModal } from "../redux/actions";
-import { RootState } from "../redux/reducers";
-import {
-  getAdminLoginModalVisibility,
-  getAdminLoginCallback
-} from "../redux/selectors";
+import { getAdminLoginCallback } from "../redux/selectors";
 
 interface Props {
   onHide: () => void;
-  adminLoginCallback: ((password: string) => void) | undefined;
 }
-const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
+const AdminLoginModal = ({ onHide }: Props) => {
   const [password, setPassword] = useState("");
+
+  const adminLoginCallback = useSelector(getAdminLoginCallback);
 
   return (
     <div className="modal is-active">
@@ -57,10 +54,6 @@ const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  adminLoginModalVisibility: getAdminLoginModalVisibility(state),
-  adminLoginCallback: getAdminLoginCallback(state)
-});
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators({ hideAdminLoginModal }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(AdminLoginModal);
+export default connect(null, mapDispatchToProps)(AdminLoginModal);
