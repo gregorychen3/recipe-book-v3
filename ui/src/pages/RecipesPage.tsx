@@ -8,9 +8,9 @@ import { getRecipes } from "../redux/selectors";
 import { IGroupBy, IGroupByValues } from "../types";
 
 export default () => {
-  const dispatch = useDispatch();
   const recipes = useSelector(getRecipes);
 
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchRecipes());
   }, [dispatch]);
