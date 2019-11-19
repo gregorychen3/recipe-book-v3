@@ -6,7 +6,7 @@ import { bindActionCreators, Dispatch } from "redux";
 import { IRecipeModel } from "../../../src/db/recipe";
 import { IIngredient } from "../../../src/types";
 import { capitalize } from "../helpers";
-import { ActionTypes, fetchRecipe, updateRecipe } from "../redux/actions";
+import { ActionTypes, fetchRecipe } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import { recipes } from "../redux/selectors";
 
@@ -168,7 +168,4 @@ const mapStateToProps = (state: RootState) => ({
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators({ fetchRecipe }, dispatch);
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RecipePage);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipePage);
