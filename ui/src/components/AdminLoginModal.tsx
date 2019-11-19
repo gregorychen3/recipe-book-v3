@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { connect, useSelector } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
-import { ActionTypes, hideAdminLoginModal } from "../redux/actions";
+import { useSelector } from "react-redux";
 import { getAdminLoginCallback } from "../redux/selectors";
 
 interface Props {
   onHide: () => void;
 }
-const AdminLoginModal = ({ onHide }: Props) => {
+export default ({ onHide }: Props) => {
   const [password, setPassword] = useState("");
 
   const adminLoginCallback = useSelector(getAdminLoginCallback);
@@ -53,7 +51,3 @@ const AdminLoginModal = ({ onHide }: Props) => {
     </div>
   );
 };
-
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators({ hideAdminLoginModal }, dispatch);
-export default connect(null, mapDispatchToProps)(AdminLoginModal);
