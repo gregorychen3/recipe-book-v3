@@ -2,8 +2,8 @@ import { RootState } from "./reducers/index";
 
 export const getRecipes = (state: RootState) => state.data.recipes;
 
-export const adminLoginModalVisibility = (state: RootState) =>
+export const getAdminLoginModalVisibility = (state: RootState) =>
   state.ui.adminLoginModalVisibility;
 
-export const adminLoginCallback = (state: RootState) =>
+export const getAdminLoginCallback = (state: RootState) =>
   state.data.adminLoginCallback;

@@ -14,7 +14,7 @@ import {
   updateRecipe
 } from "../redux/actions";
 import { RootState } from "../redux/reducers";
-import { adminLoginModalVisibility, getRecipes } from "../redux/selectors";
+import { getAdminLoginModalVisibility, getRecipes } from "../redux/selectors";
 import { IRecipe } from "../types";
 
 interface Props {
@@ -72,7 +72,7 @@ const EditRecipePage = ({
 
 const mapStateToProps = (state: RootState) => ({
   recipes: getRecipes(state),
-  adminLoginModalVisibility: adminLoginModalVisibility(state)
+  adminLoginModalVisibility: getAdminLoginModalVisibility(state)
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators(

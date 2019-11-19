@@ -4,8 +4,8 @@ import { bindActionCreators, Dispatch } from "redux";
 import { ActionTypes, hideAdminLoginModal } from "../redux/actions";
 import { RootState } from "../redux/reducers";
 import {
-  adminLoginModalVisibility,
-  adminLoginCallback
+  getAdminLoginModalVisibility,
+  getAdminLoginCallback
 } from "../redux/selectors";
 
 interface Props {
@@ -58,12 +58,9 @@ const AdminLoginModal = ({ onHide, adminLoginCallback }: Props) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  adminLoginModalVisibility: adminLoginModalVisibility(state),
-  adminLoginCallback: adminLoginCallback(state)
+  adminLoginModalVisibility: getAdminLoginModalVisibility(state),
+  adminLoginCallback: getAdminLoginCallback(state)
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators({ hideAdminLoginModal }, dispatch);
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AdminLoginModal);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminLoginModal);
