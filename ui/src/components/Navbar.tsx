@@ -1,16 +1,14 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { bindActionCreators, Dispatch } from "redux";
 import { defaultRecipe } from "../helpers";
-import { ActionTypes, createRecipe } from "../redux/actions";
+import { createRecipe } from "../redux/actions";
 
-interface Props {
-  createRecipe: typeof createRecipe;
-}
-const Navbar = ({ createRecipe }: Props) => {
+export default () => {
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
+
+  const dispatch = useDispatch();
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -74,7 +72,7 @@ const Navbar = ({ createRecipe }: Props) => {
           <a
             className="navbar-item"
             onClick={() => {
-              createRecipe(defaultRecipe());
+              dispatch(createRecipe(defaultRecipe()));
               setShowBurgerMenu(false);
             }}
             href="#/"
@@ -96,10 +94,3 @@ const Navbar = ({ createRecipe }: Props) => {
     </nav>
   );
 };
-
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators({ createRecipe }, dispatch);
-export default connect(
-  null,
-  mapDispatchToProps
-)(Navbar);
