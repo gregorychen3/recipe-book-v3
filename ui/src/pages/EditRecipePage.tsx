@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { bindActionCreators, Dispatch } from "redux";
 import { RecipeForm } from "../components/RecipeForm";
 import {
-  ActionTypes,
   deleteRecipe,
   fetchRecipe,
   hideAdminLoginModal,
@@ -15,20 +13,7 @@ import {
 import { getAdminLoginModalVisibility, getRecipes } from "../redux/selectors";
 import { IRecipe } from "../types";
 
-interface Props {
-  updateRecipe: typeof updateRecipe;
-  deleteRecipe: typeof deleteRecipe;
-  showAdminLoginModal: typeof showAdminLoginModal;
-  hideAdminLoginModal: typeof hideAdminLoginModal;
-  setAdminLoginCallback: typeof setAdminLoginCallback;
-}
-const EditRecipePage = ({
-  updateRecipe,
-  deleteRecipe,
-  showAdminLoginModal,
-  hideAdminLoginModal,
-  setAdminLoginCallback
-}: Props) => {
+export default () => {
   let history = useHistory();
   const adminLoginModalVisibility = useSelector(getAdminLoginModalVisibility);
   const recipes = useSelector(getRecipes);
@@ -52,27 +37,16 @@ const EditRecipePage = ({
     <RecipeForm
       recipe={recipe}
       onSubmit={(recipeId: string, recipe: IRecipe) => (password: string) =>
-        updateRecipe(recipeId, recipe, password)}
+        dispatch(updateRecipe(recipeId, recipe, password))}
       onDelete={(recipeId: string) => (password: string) =>
-        deleteRecipe(recipeId, password)}
+        dispatch(deleteRecipe(recipeId, password))}
       onCancel={(recipeId: string) => history.push(`/recipes/${recipeId}`)}
       adminLoginModalVisibility={adminLoginModalVisibility}
-      showAdminLoginModal={showAdminLoginModal}
-      hideAdminLoginModal={hideAdminLoginModal}
-      setAdminLoginCallback={setAdminLoginCallback}
+      showAdminLoginModal={() => dispatch(showAdminLoginModal())}
+      hideAdminLoginModal={() => dispatch(hideAdminLoginModal())}
+      setAdminLoginCallback={(callback: (password: string) => void) =>
+        dispatch(setAdminLoginCallback(callback))
+      }
     />
   );
 };
-
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators(
-    {
-      updateRecipe,
-      deleteRecipe,
-      showAdminLoginModal,
-      hideAdminLoginModal,
-      setAdminLoginCallback
-    },
-    dispatch
-  );
-export default connect(null, mapDispatchToProps)(EditRecipePage);
