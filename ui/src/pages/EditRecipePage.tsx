@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
-import { IRecipeModel } from "../../../src/db/recipe";
 import { RecipeForm } from "../components/RecipeForm";
 import {
   ActionTypes,
@@ -13,32 +12,28 @@ import {
   showAdminLoginModal,
   updateRecipe
 } from "../redux/actions";
-import { RootState } from "../redux/reducers";
 import { getAdminLoginModalVisibility, getRecipes } from "../redux/selectors";
 import { IRecipe } from "../types";
 
 interface Props {
-  recipes: IRecipeModel[];
   fetchRecipe: typeof fetchRecipe;
   updateRecipe: typeof updateRecipe;
   deleteRecipe: typeof deleteRecipe;
-  adminLoginModalVisibility: boolean;
   showAdminLoginModal: typeof showAdminLoginModal;
   hideAdminLoginModal: typeof hideAdminLoginModal;
   setAdminLoginCallback: typeof setAdminLoginCallback;
 }
 const EditRecipePage = ({
-  recipes,
   fetchRecipe,
   updateRecipe,
   deleteRecipe,
-  adminLoginModalVisibility,
   showAdminLoginModal,
   hideAdminLoginModal,
   setAdminLoginCallback
 }: Props) => {
   let history = useHistory();
-
+  const adminLoginModalVisibility = useSelector(getAdminLoginModalVisibility);
+  const recipes = useSelector(getRecipes);
   let { recipeId } = useParams();
 
   useEffect(() => {
@@ -70,10 +65,6 @@ const EditRecipePage = ({
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  recipes: getRecipes(state),
-  adminLoginModalVisibility: getAdminLoginModalVisibility(state)
-});
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators(
     {
@@ -86,4 +77,4 @@ const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
     },
     dispatch
   );
-export default connect(mapStateToProps, mapDispatchToProps)(EditRecipePage);
+export default connect(null, mapDispatchToProps)(EditRecipePage);
