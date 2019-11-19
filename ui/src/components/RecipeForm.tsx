@@ -65,7 +65,6 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     showAdminLoginModal,
     hideAdminLoginModal,
     setAdminLoginCallback,
-    onCancel,
     onDelete
   } = props;
   return (
