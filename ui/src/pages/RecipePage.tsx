@@ -8,7 +8,7 @@ import { IIngredient } from "../../../src/types";
 import { capitalize } from "../helpers";
 import { ActionTypes, fetchRecipe } from "../redux/actions";
 import { RootState } from "../redux/reducers";
-import { recipes } from "../redux/selectors";
+import { getRecipes } from "../redux/selectors";
 
 const getIngredientDisplay = (i: IIngredient, scalingFactor: number) => {
   let display = "";
@@ -164,7 +164,7 @@ const RecipePage = ({ recipes, fetchRecipe }: Props) => {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  recipes: recipes(state)
+  recipes: getRecipes(state)
 });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators({ fetchRecipe }, dispatch);

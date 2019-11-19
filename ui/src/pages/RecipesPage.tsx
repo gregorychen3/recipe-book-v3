@@ -7,7 +7,7 @@ import { IRecipeModel } from "../../../src/db/recipe";
 import RecipeList from "../components/RecipeList";
 import { ActionTypes, fetchRecipes } from "../redux/actions";
 import { RootState } from "../redux/reducers";
-import { recipes } from "../redux/selectors";
+import { getRecipes } from "../redux/selectors";
 import { IGroupBy, IGroupByValues } from "../types";
 
 interface Props {
@@ -39,10 +39,7 @@ const RecipesPage = ({ recipes, fetchRecipes }: Props) => {
   );
 };
 
-const mapStateToProps = (state: RootState) => ({ recipes: recipes(state) });
+const mapStateToProps = (state: RootState) => ({ recipes: getRecipes(state) });
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators({ fetchRecipes }, dispatch);
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RecipesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipesPage);
