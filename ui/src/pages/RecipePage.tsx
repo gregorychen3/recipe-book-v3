@@ -1,11 +1,10 @@
 import isUrl from "is-url";
 import React, { useEffect, useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
-import { bindActionCreators, Dispatch } from "redux";
 import { IIngredient } from "../../../src/types";
 import { capitalize } from "../helpers";
-import { ActionTypes, fetchRecipe } from "../redux/actions";
+import { fetchRecipe } from "../redux/actions";
 import { getRecipes } from "../redux/selectors";
 
 const getIngredientDisplay = (i: IIngredient, scalingFactor: number) => {
@@ -25,20 +24,18 @@ const getSourceDisplay = (s: string) =>
     s
   );
 
-interface Props {
-  fetchRecipe: typeof fetchRecipe;
-}
-const RecipePage = ({ fetchRecipe }: Props) => {
+export default () => {
   const recipes = useSelector(getRecipes);
   const history = useHistory();
   const { recipeId } = useParams();
 
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!recipeId) {
       return;
     }
-    fetchRecipe(recipeId);
-  }, [fetchRecipe, recipeId]);
+    dispatch(fetchRecipe(recipeId));
+  }, [dispatch, recipeId]);
 
   const recipe = recipes.find(r => r._id === recipeId);
 
@@ -159,7 +156,3 @@ const RecipePage = ({ fetchRecipe }: Props) => {
     </section>
   );
 };
-
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators({ fetchRecipe }, dispatch);
-export default connect(null, mapDispatchToProps)(RecipePage);
