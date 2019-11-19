@@ -1,22 +1,19 @@
 import queryString from "query-string";
 import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { bindActionCreators, Dispatch } from "redux";
 import RecipeList from "../components/RecipeList";
-import { ActionTypes, fetchRecipes } from "../redux/actions";
+import { fetchRecipes } from "../redux/actions";
 import { getRecipes } from "../redux/selectors";
 import { IGroupBy, IGroupByValues } from "../types";
 
-interface Props {
-  fetchRecipes: typeof fetchRecipes;
-}
-const RecipesPage = ({ fetchRecipes }: Props) => {
+export default () => {
+  const dispatch = useDispatch();
   const recipes = useSelector(getRecipes);
 
   useEffect(() => {
-    fetchRecipes();
-  }, [fetchRecipes]);
+    dispatch(fetchRecipes());
+  }, [dispatch]);
 
   let location = useLocation();
   const parsed = queryString.parse(location.search);
@@ -37,7 +34,3 @@ const RecipesPage = ({ fetchRecipes }: Props) => {
     </section>
   );
 };
-
-const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
-  bindActionCreators({ fetchRecipes }, dispatch);
-export default connect(null, mapDispatchToProps)(RecipesPage);
