@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { bindActionCreators, Dispatch } from "redux";
 import { RecipeForm } from "../components/RecipeForm";
@@ -16,7 +16,6 @@ import { getAdminLoginModalVisibility, getRecipes } from "../redux/selectors";
 import { IRecipe } from "../types";
 
 interface Props {
-  fetchRecipe: typeof fetchRecipe;
   updateRecipe: typeof updateRecipe;
   deleteRecipe: typeof deleteRecipe;
   showAdminLoginModal: typeof showAdminLoginModal;
@@ -24,7 +23,6 @@ interface Props {
   setAdminLoginCallback: typeof setAdminLoginCallback;
 }
 const EditRecipePage = ({
-  fetchRecipe,
   updateRecipe,
   deleteRecipe,
   showAdminLoginModal,
@@ -35,13 +33,14 @@ const EditRecipePage = ({
   const adminLoginModalVisibility = useSelector(getAdminLoginModalVisibility);
   const recipes = useSelector(getRecipes);
   let { recipeId } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!recipeId) {
       return;
     }
-    fetchRecipe(recipeId);
-  }, [fetchRecipe, recipeId]);
+    dispatch(fetchRecipe(recipeId));
+  }, [dispatch, recipeId]);
 
   const recipe = recipes.find(r => r._id === recipeId);
   if (!recipe) {
@@ -68,7 +67,6 @@ const EditRecipePage = ({
 const mapDispatchToProps = (dispatch: Dispatch<ActionTypes>) =>
   bindActionCreators(
     {
-      fetchRecipe,
       updateRecipe,
       deleteRecipe,
       showAdminLoginModal,
