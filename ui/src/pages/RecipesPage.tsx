@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import RecipeList from "../components/RecipeList";
 import { fetchRecipes } from "../redux/actions";
-import { getRecipes } from "../redux/selectors";
+import { getIsFetchingRecipes, getRecipes } from "../redux/selectors";
 import { IGroupBy, IGroupByValues } from "../types";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default () => {
   const recipes = useSelector(getRecipes);
+  const isFetchingRecipes = useSelector(getIsFetchingRecipes);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -29,7 +31,11 @@ export default () => {
   return (
     <section className="section">
       <div className="container">
-        <RecipeList recipes={recipes} groupBy={groupBy} />
+        {isFetchingRecipes ? (
+          <LoadingSpinner />
+        ) : (
+          <RecipeList recipes={recipes} groupBy={groupBy} />
+        )}
       </div>
     </section>
   );
