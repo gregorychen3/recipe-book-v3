@@ -7,3 +7,6 @@ export const getAdminLoginModalVisibility = (state: RootState) =>
 
 export const getAdminLoginCallback = (state: RootState) =>
   state.data.adminLoginCallback;
+
+export const isFetchingRecipes = (state: RootState) =>
+  state.ui.isFetchingRecipes;
